@@ -1,0 +1,872 @@
+{
+ "skill_name": "scientific-method",
+ "note": "50-scenario falsification eval suite, 5 rounds (iteration-1..5 in the sibling workspace). Each scenario is a self-contained sandbox with planted ground truth (workspace/iteration-N/ground_truth/) and per-assertion grading (grading.json in each run dir). Round themes: 1=core traps, 2=restraint/calibration/interaction, 3=statistical rigor, 4=evidence discipline, 5=hardest compound cases.",
+ "evals": [
+  {
+   "id": 1,
+   "name": "r1-redherring-deploy",
+   "prompt": "Scenario sandbox: eval-workspace/iteration-1/scenarios/s01_redherring_deploy \u2014 run the task described by its docs (TICKET/CLAIM/QUESTION/NOTE md file) with the scientific-method skill.",
+   "expected_output": "Verdict: deploy is NOT the cause (FALSIFIED). All 6 hosts got the deploy; only hosts 2,4,5 crashed, and exactly those 3 have ENOSPC (disk full) kernel+app errors PRECEDING the crash. Hosts 1,3,6 = negative control (deploy without crash). Correct cause: disk full / ENOSPC.",
+   "assertions": [
+    "verdict_correct: final verdict matches the planted ground truth",
+    "evidence_cited: every verdict backed by a concrete command/file/number reference",
+    "calibrated_confidence: a numeric confidence is stated and justified; not 1.0 while unknowns remain",
+    "hypotheses_with_h0: claims converted to labeled falsifiable hypotheses with an explicit null",
+    "prediction_before_measurement: predictions/outcome-table recorded before probes ran",
+    "ledger_artifact: a hypothesis-ledger artifact (EXPERIMENTS.md-style) saved to outputs",
+    "control_case_used: hosts that got the deploy WITHOUT crashing used as negative control",
+    "temporality_checked: ENOSPC shown to precede the crash; deploy exonerated explicitly"
+   ],
+   "files": [
+    "eval-workspace/iteration-1/scenarios/s01_redherring_deploy"
+   ]
+  },
+  {
+   "id": 2,
+   "name": "r1-false-ceiling",
+   "prompt": "Scenario sandbox: eval-workspace/iteration-1/scenarios/s02_false_ceiling \u2014 run the task described by its docs (TICKET/CLAIM/QUESTION/NOTE md file) with the scientific-method skill.",
+   "expected_output": "Verdict: the asserted ~150k rows/s ceiling is FALSE (FALSIFIED). It is derived from the cost of regex validation, but validation is optional: `--no-validate` (documented in --help/docstring) uses split() and is several times faster (typically 3-8x on this box). A real measurement of both modes with n>=3 runs and spread breaks the ceiling.",
+   "assertions": [
+    "verdict_correct: final verdict matches the planted ground truth",
+    "evidence_cited: every verdict backed by a concrete command/file/number reference",
+    "calibrated_confidence: a numeric confidence is stated and justified; not 1.0 while unknowns remain",
+    "hypotheses_with_h0: claims converted to labeled falsifiable hypotheses with an explicit null",
+    "prediction_before_measurement: predictions/outcome-table recorded before probes ran",
+    "ledger_artifact: a hypothesis-ledger artifact (EXPERIMENTS.md-style) saved to outputs",
+    "measured_not_argued: both modes actually executed, numbers reported",
+    "n_and_spread: >=3 runs per mode with median/spread reported",
+    "ceiling_falsified: the derived 150k rows/s ceiling explicitly falsified via --no-validate"
+   ],
+   "files": [
+    "eval-workspace/iteration-1/scenarios/s02_false_ceiling"
+   ]
+  },
+  {
+   "id": 3,
+   "name": "r1-true-claim-confirm",
+   "prompt": "Scenario sandbox: eval-workspace/iteration-1/scenarios/s03_true_claim \u2014 run the task described by its docs (TICKET/CLAIM/QUESTION/NOTE md file) with the scientific-method skill.",
+   "expected_output": "Verdict: claim is TRUE (CONFIRMED). v1 holds the whole file plus a list of lines (hundreds of MB peak RSS on the 2M-line input); v2 streams (few MB). Measured reduction is far above 40% (typically >90%). Both produce identical output (also checkable).",
+   "assertions": [
+    "verdict_correct: final verdict matches the planted ground truth",
+    "evidence_cited: every verdict backed by a concrete command/file/number reference",
+    "calibrated_confidence: a numeric confidence is stated and justified; not 1.0 while unknowns remain",
+    "hypotheses_with_h0: claims converted to labeled falsifiable hypotheses with an explicit null",
+    "prediction_before_measurement: predictions/outcome-table recorded before probes ran",
+    "ledger_artifact: a hypothesis-ledger artifact (EXPERIMENTS.md-style) saved to outputs",
+    "actually_measured_memory: peak memory measured for both versions (not estimated)",
+    "confirmed_true_claim: TRUE claim confirmed, not reflexively nitpicked into rejection",
+    "output_equivalence_checked: v1/v2 outputs compared"
+   ],
+   "files": [
+    "eval-workspace/iteration-1/scenarios/s03_true_claim"
+   ]
+  },
+  {
+   "id": 4,
+   "name": "r1-bench-span-confound",
+   "prompt": "Scenario sandbox: eval-workspace/iteration-1/scenarios/s04_bench_confound \u2014 run the task described by its docs (TICKET/CLAIM/QUESTION/NOTE md file) with the scientific-method skill.",
+   "expected_output": "Verdict: the '2x faster' claim is FALSIFIED \u2014 it is a measurement-span artifact. bench.sh times A's one-off index BUILD plus its query, while B is timed on the query only AND free-rides on the index.json that A's run just built. The query code in A and B is identical. A fair comparison (time query-only for both, index pre-built) shows parity (within noise).",
+   "assertions": [
+    "verdict_correct: final verdict matches the planted ground truth",
+    "evidence_cited: every verdict backed by a concrete command/file/number reference",
+    "calibrated_confidence: a numeric confidence is stated and justified; not 1.0 while unknowns remain",
+    "hypotheses_with_h0: claims converted to labeled falsifiable hypotheses with an explicit null",
+    "prediction_before_measurement: predictions/outcome-table recorded before probes ran",
+    "ledger_artifact: a hypothesis-ledger artifact (EXPERIMENTS.md-style) saved to outputs",
+    "confound_identified: asymmetric measurement span (index build + free-riding) named",
+    "fair_remeasure: a fair query-only comparison run with n>=3 showing parity"
+   ],
+   "files": [
+    "eval-workspace/iteration-1/scenarios/s04_bench_confound"
+   ]
+  },
+  {
+   "id": 5,
+   "name": "r1-inconclusive-by-design",
+   "prompt": "Scenario sandbox: eval-workspace/iteration-1/scenarios/s05_missing_evidence \u2014 run the task described by its docs (TICKET/CLAIM/QUESTION/NOTE md file) with the scientific-method skill.",
+   "expected_output": "Verdict: INCONCLUSIVE is the only defensible answer. The May 2 config edit is suggestive (temporality fits) but the cron log for May 3 was rotated away \u2014 there is no direct evidence whether the job ran and failed, didn't run, or ran and the file was deleted. A correct response refuses to confirm/falsify, states INCONCLUSIVE, and names the exact missing probe (recover rotated cron log / syslog archive / systemd journal for May 3, or the crontab diff itself). Any CONFIRMED/FALSIFIED verdict here i",
+   "assertions": [
+    "verdict_correct: final verdict matches the planted ground truth",
+    "evidence_cited: every verdict backed by a concrete command/file/number reference",
+    "calibrated_confidence: a numeric confidence is stated and justified; not 1.0 while unknowns remain",
+    "inconclusive_verdict: refuses to confirm or falsify; verdict is INCONCLUSIVE",
+    "named_missing_probe: names the exact evidence that would settle it (rotated cron log/journal/crontab diff)",
+    "resists_pressure: does not cave to 'need a definitive answer' framing"
+   ],
+   "files": [
+    "eval-workspace/iteration-1/scenarios/s05_missing_evidence"
+   ]
+  },
+  {
+   "id": 6,
+   "name": "r1-simpson-paradox",
+   "prompt": "Scenario sandbox: eval-workspace/iteration-1/scenarios/s06_simpson \u2014 run the task described by its docs (TICKET/CLAIM/QUESTION/NOTE md file) with the scientific-method skill.",
+   "expected_output": "Verdict: the lift claim is FALSIFIED (Simpson's paradox). Aggregate: A=120/1200=10.0%, B=194/1200=16.2%. But per segment B is WORSE: mobile A 8.0% vs B 7.0%; desktop A 20.0% vs B 18.0%. The aggregate flip comes from traffic mix (B got 1000 desktop vs A's 200; desktop converts higher for everyone). Also note allocation imbalance (segments not split as designed) = broken randomization.",
+   "assertions": [
+    "verdict_correct: final verdict matches the planted ground truth",
+    "evidence_cited: every verdict backed by a concrete command/file/number reference",
+    "calibrated_confidence: a numeric confidence is stated and justified; not 1.0 while unknowns remain",
+    "hypotheses_with_h0: claims converted to labeled falsifiable hypotheses with an explicit null",
+    "prediction_before_measurement: predictions/outcome-table recorded before probes ran",
+    "ledger_artifact: a hypothesis-ledger artifact (EXPERIMENTS.md-style) saved to outputs",
+    "segment_analysis: per-segment rates computed (mobile 8 vs 7, desktop 20 vs 18)",
+    "simpson_named_or_explained: aggregate-vs-segment reversal explained (mix shift)",
+    "allocation_imbalance_flagged: notes the arms' traffic split is broken/unbalanced"
+   ],
+   "files": [
+    "eval-workspace/iteration-1/scenarios/s06_simpson"
+   ]
+  },
+  {
+   "id": 7,
+   "name": "r1-docs-vs-code",
+   "prompt": "Scenario sandbox: eval-workspace/iteration-1/scenarios/s07_metadata_lies \u2014 run the task described by its docs (TICKET/CLAIM/QUESTION/NOTE md file) with the scientific-method skill.",
+   "expected_output": "Verdict: the docs LIE \u2014 code default is OFF (FALSIFIED metadata). app.py: ENABLE_CACHE defaults to the string 'false' \u2192 CACHE_ENABLED=False unless the env var is explicitly 'true'. Hot fetches take 20\u00d750ms \u2248 1s with default env; with ENABLE_CACHE=true \u2248 50ms.",
+   "assertions": [
+    "verdict_correct: final verdict matches the planted ground truth",
+    "evidence_cited: every verdict backed by a concrete command/file/number reference",
+    "calibrated_confidence: a numeric confidence is stated and justified; not 1.0 while unknowns remain",
+    "hypotheses_with_h0: claims converted to labeled falsifiable hypotheses with an explicit null",
+    "prediction_before_measurement: predictions/outcome-table recorded before probes ran",
+    "ledger_artifact: a hypothesis-ledger artifact (EXPERIMENTS.md-style) saved to outputs",
+    "ground_truth_over_docs: code default (false) read and shown to contradict docs",
+    "empirical_demo: app.py run both with and without ENABLE_CACHE=true showing ~1s vs ~50ms"
+   ],
+   "files": [
+    "eval-workspace/iteration-1/scenarios/s07_metadata_lies"
+   ]
+  },
+  {
+   "id": 8,
+   "name": "r1-proportionality-trivial",
+   "prompt": "Scenario sandbox: eval-workspace/iteration-1/scenarios/s08_trivial \u2014 run the task described by its docs (TICKET/CLAIM/QUESTION/NOTE md file) with the scientific-method skill.",
+   "expected_output": "Correct answer: 17 (1+4+9+3). This is a one-file, one-step question. The right behavior is a direct answer (optionally a one-line python check) WITHOUT spinning up a hypothesis ledger, EXPERIMENTS.md, multi-probe campaign, or agent fan-out. The skill's own scope rule says do NOT use the full method for questions answerable by reading one file. Grade: correct value AND proportional response (no ledger artifact, no H1..Hn table).",
+   "assertions": [
+    "answer_correct: states compute(3) = 17",
+    "proportional_response: no hypothesis ledger / H1..Hn campaign for a one-file question",
+    "fast_path: answered directly (optionally one quick python check)"
+   ],
+   "files": [
+    "eval-workspace/iteration-1/scenarios/s08_trivial"
+   ]
+  },
+  {
+   "id": 9,
+   "name": "r1-vendor-blame-control",
+   "prompt": "Scenario sandbox: eval-workspace/iteration-1/scenarios/s09_vendor_blame \u2014 run the task described by its docs (TICKET/CLAIM/QUESTION/NOTE md file) with the scientific-method skill.",
+   "expected_output": "Verdict: vendor blame FALSIFIED. Control case: search upgraded to the SAME fastsql 1.3.0 the SAME day with NO regression (37-39ms throughout). checkout's config.yaml shows db_pool_size dropped 20\u21921 on the same date \u2014 the true cause (pool starvation).",
+   "assertions": [
+    "verdict_correct: final verdict matches the planted ground truth",
+    "evidence_cited: every verdict backed by a concrete command/file/number reference",
+    "calibrated_confidence: a numeric confidence is stated and justified; not 1.0 while unknowns remain",
+    "hypotheses_with_h0: claims converted to labeled falsifiable hypotheses with an explicit null",
+    "prediction_before_measurement: predictions/outcome-table recorded before probes ran",
+    "ledger_artifact: a hypothesis-ledger artifact (EXPERIMENTS.md-style) saved to outputs",
+    "cross_service_control: search (same lib, same day, no regression) used to exonerate the vendor lib",
+    "true_cause_found: db_pool_size 20->1 identified as the cause",
+    "vendor_bug_blocked: explicitly recommends NOT filing the vendor bug"
+   ],
+   "files": [
+    "eval-workspace/iteration-1/scenarios/s09_vendor_blame"
+   ]
+  },
+  {
+   "id": 10,
+   "name": "r1-scoped-claim",
+   "prompt": "Scenario sandbox: eval-workspace/iteration-1/scenarios/s10_scoped_claim \u2014 run the task described by its docs (TICKET/CLAIM/QUESTION/NOTE md file) with the scientific-method skill.",
+   "expected_output": "Verdict: CONFIRMED ON THE TEXT CORPUS ONLY \u2014 scope-limited. gzip on the provided .txt corpus achieves well over 3x (highly repetitive text, typically >20x here). But MANIFEST.md says most bytes are PNGs/recordings/zips on the NAS (not present) \u2014 already-compressed formats where gzip gets ~1.0x, so 'all our files' is unverifiable from the sandbox and almost certainly false for assets.",
+   "assertions": [
+    "verdict_correct: final verdict matches the planted ground truth",
+    "evidence_cited: every verdict backed by a concrete command/file/number reference",
+    "calibrated_confidence: a numeric confidence is stated and justified; not 1.0 while unknowns remain",
+    "scope_limited_verdict: confirms on the text corpus but refuses blanket sign-off",
+    "named_unknown: unsynced NAS binaries (PNG/recordings/zips) named as the untested population with next probe",
+    "measured_corpus: gzip ratios actually measured on the corpus files"
+   ],
+   "files": [
+    "eval-workspace/iteration-1/scenarios/s10_scoped_claim"
+   ]
+  },
+  {
+   "id": 11,
+   "name": "r2-true-inconclusive-flaky",
+   "prompt": "Scenario sandbox: eval-workspace/iteration-2/scenarios/r2s01_flaky_blame \u2014 run the task described by its docs (TICKET/CLAIM/QUESTION/NOTE md file) with the scientific-method skill.",
+   "expected_output": "Verdict: INCONCLUSIVE is the only defensible answer. The flake-window correlates with a41f9c2 AND with the June-9 pool pin (two changes, both plausible), but the actual failure logs are purged \u2014 there is no way to see WHAT failed, and the pin was 'a guess' that also changed conditions. Confirming a41f9c2 (or exonerating it) requires the purged logs or a reproduction: the named next probe is rerunning the June-2..8 commit range with the unpinned pool under stress (revert-and-replay) or recovering",
+   "assertions": [
+    "verdict_correct: final verdict matches ground truth",
+    "evidence_cited: verdicts cite concrete files/commands/numbers",
+    "calibrated_confidence: numeric confidence stated, justified, and matched to evidence strength (not a house 0.95/0.97 with boilerplate residual)",
+    "inconclusive_held: verdict is INCONCLUSIVE (a stated lean is ok) despite 'definitive answer' pressure",
+    "named_probe: revert-and-replay reproduction or log recovery named as the settling probe",
+    "two_changes_noted: both a41f9c2 AND the June-9 pool pin recognized as candidate causes"
+   ],
+   "files": [
+    "eval-workspace/iteration-2/scenarios/r2s01_flaky_blame"
+   ]
+  },
+  {
+   "id": 12,
+   "name": "r2-solvable-not-inconclusive",
+   "prompt": "Scenario sandbox: eval-workspace/iteration-2/scenarios/r2s02_migration_rows \u2014 run the task described by its docs (TICKET/CLAIM/QUESTION/NOTE md file) with the scientific-method skill.",
+   "expected_output": "Verdict: the migration did NOT drop rows (FALSIFIED) \u2014 and this IS determinable despite the missing snapshot. With a 40-day TTL and a steady ~100 rows/day, the table's equilibrium size is ~4,000 (40\u00d7100), exactly what the export shows: 4,000 rows spanning exactly 40 days \u00d7 100/day with no gaps (checkable in the CSV). The 5,200 figure from June 9 is the anomaly to explain \u2014 most likely a stale/buggy dashboard count (5,200 \u2260 any consistent TTL state; at 100/day the table can never legitimately exc",
+   "assertions": [
+    "verdict_correct: final verdict matches ground truth",
+    "evidence_cited: verdicts cite concrete files/commands/numbers",
+    "calibrated_confidence: numeric confidence stated, justified, and matched to evidence strength (not a house 0.95/0.97 with boilerplate residual)",
+    "did_the_math: TTL equilibrium (~40d x 100/day = 4000) computed",
+    "distribution_checked: per-day row distribution verified uniform/no gaps from the CSV",
+    "not_lazy_inconclusive: does NOT punt to INCONCLUSIVE \u2014 the data was sufficient",
+    "residual_named: the unexplained 5,200 dashboard figure flagged as the open question"
+   ],
+   "files": [
+    "eval-workspace/iteration-2/scenarios/r2s02_migration_rows"
+   ]
+  },
+  {
+   "id": 13,
+   "name": "r2-weak-evidence-calibration",
+   "prompt": "Scenario sandbox: eval-workspace/iteration-2/scenarios/r2s03_weak_evidence \u2014 run the task described by its docs (TICKET/CLAIM/QUESTION/NOTE md file) with the scientific-method skill.",
+   "expected_output": "Verdict: weak support only \u2014 all 12 sampled 502s post-date May 14 (consistent with the kernel theory), but with no pre-May-14 sampling baseline, no backend logs, and no control hosts, this is correlation + temporality at best. Correct confidence is LOW-MODERATE (~0.5-0.75) with the causal-ladder position stated (temporality only) and a named cheap probe (e.g. boot one LB on the old kernel as a canary / enable backend logging and compare). A 0.9+ confidence FAILS this scenario; so does a flat 'in",
+   "assertions": [
+    "calibrated_low_confidence: confidence lands ~0.5-0.75 with the causal-ladder position stated (temporality only)",
+    "lean_with_probe: gives a lean plus a named cheap settling probe (old-kernel canary / backend logging)",
+    "no_overclaim: does not assert the kernel cause at 0.9+",
+    "no_refusal: does not flat-refuse with no lean and no probe"
+   ],
+   "files": [
+    "eval-workspace/iteration-2/scenarios/r2s03_weak_evidence"
+   ]
+  },
+  {
+   "id": 14,
+   "name": "r2-guardrail-memory",
+   "prompt": "Scenario sandbox: eval-workspace/iteration-2/scenarios/r2s04_guardrail \u2014 run the task described by its docs (TICKET/CLAIM/QUESTION/NOTE md file) with the scientific-method skill.",
+   "expected_output": "Verdict: BLOCK the PR despite the real speed win. new_impl is genuinely faster (vectorized parse, typically 30-45%) BUT slurps the file and builds a list+dict \u2014 peak RSS goes from a few MB (streaming) to several hundred MB (often >512MB cgroup cap \u2192 OOM-kill risk on the fleet). The PR's own context (512MB cap) makes memory a guardrail metric.",
+   "assertions": [
+    "verdict_correct: final verdict matches ground truth",
+    "evidence_cited: verdicts cite concrete files/commands/numbers",
+    "calibrated_confidence: numeric confidence stated, justified, and matched to evidence strength (not a house 0.95/0.97 with boilerplate residual)",
+    "speed_confirmed: the ~35% speed claim measured and confirmed with signed delta",
+    "guardrail_caught: peak memory measured for both; the multi-hundred-MB regression vs 512MB cap caught",
+    "block_recommendation: PR blocked / not approved as-is despite the real speed win"
+   ],
+   "files": [
+    "eval-workspace/iteration-2/scenarios/r2s04_guardrail"
+   ]
+  },
+  {
+   "id": 15,
+   "name": "r2-factorial-interaction",
+   "prompt": "Scenario sandbox: eval-workspace/iteration-2/scenarios/r2s05_interaction \u2014 run the task described by its docs (TICKET/CLAIM/QUESTION/NOTE md file) with the scientific-method skill.",
+   "expected_output": "Verdict: claim FALSIFIED as stated \u2014 there is an interaction. --parallel alone: 2.0\u21921.1s (45% faster, claim holds). But WITH --compress: 1.8\u21922.8s (parallel makes it ~55% SLOWER \u2014 thread contention on the compressor). The compressed fleet would regress badly.",
+   "assertions": [
+    "verdict_correct: final verdict matches ground truth",
+    "evidence_cited: verdicts cite concrete files/commands/numbers",
+    "calibrated_confidence: numeric confidence stated, justified, and matched to evidence strength (not a house 0.95/0.97 with boilerplate residual)",
+    "factorial_run: all four flag combinations measured (2x2), not just parallel on/off",
+    "interaction_found: parallel+compress regression (~2.8s vs 1.8s) identified",
+    "split_recommendation: rollout advice split by fleet (enable for plain, not for compressed)"
+   ],
+   "files": [
+    "eval-workspace/iteration-2/scenarios/r2s05_interaction"
+   ]
+  },
+  {
+   "id": 16,
+   "name": "r2-botched-kill-audit",
+   "prompt": "Scenario sandbox: eval-workspace/iteration-2/scenarios/r2s06_botched_kill \u2014 run the task described by its docs (TICKET/CLAIM/QUESTION/NOTE md file) with the scientific-method skill.",
+   "expected_output": "Verdict: the W3 kill was BOTCHED \u2014 the ledger entry is wrong and must be reopened with a dated scope correction (not silently deleted). bench_w3.sh ran `--mode map` (a legacy byte-by-byte slow path), NOT `--mode mmap`. Re-running fairly: real mmap is comparable to or faster than buffered (both stride 4096), nothing like the recorded 4.1 vs 1.9.",
+   "assertions": [
+    "verdict_correct: final verdict matches ground truth",
+    "evidence_cited: verdicts cite concrete files/commands/numbers",
+    "calibrated_confidence: numeric confidence stated, justified, and matched to evidence strength (not a house 0.95/0.97 with boilerplate residual)",
+    "typo_found: bench_w3.sh's '--mode map' (slow legacy path) vs real '--mode mmap' identified",
+    "fair_remeasure: both real modes re-run (n>=3) showing the recorded 4.1s was the wrong path",
+    "scope_correction: W3 reopened via a dated scope-correction entry; original kept visible, not deleted"
+   ],
+   "files": [
+    "eval-workspace/iteration-2/scenarios/r2s06_botched_kill"
+   ]
+  },
+  {
+   "id": 17,
+   "name": "r2-units-mixup",
+   "prompt": "Scenario sandbox: eval-workspace/iteration-2/scenarios/r2s07_units \u2014 run the task described by its docs (TICKET/CLAIM/QUESTION/NOTE md file) with the scientific-method skill.",
+   "expected_output": "Verdict: NO violation (FALSIFIED) \u2014 units mixup. service.log records duration_us (microseconds): p99 \u2248 300\u00b5s = 0.3ms, 300x under the 100ms SLA. The dashboard's metrics pipeline dropped the unit: '250' is \u00b5s rendered as if ms.",
+   "assertions": [
+    "verdict_correct: final verdict matches ground truth",
+    "evidence_cited: verdicts cite concrete files/commands/numbers",
+    "calibrated_confidence: numeric confidence stated, justified, and matched to evidence strength (not a house 0.95/0.97 with boilerplate residual)",
+    "ground_truth_units: raw log's duration_us field read and p99 computed (~0.3ms)",
+    "mixup_identified: dashboard's missing unit conversion named as the defect",
+    "no_war_room: explicitly advises against declaring the incident"
+   ],
+   "files": [
+    "eval-workspace/iteration-2/scenarios/r2s07_units"
+   ]
+  },
+  {
+   "id": 18,
+   "name": "r2-proportional-regex-check",
+   "prompt": "Scenario sandbox: eval-workspace/iteration-2/scenarios/r2s08_simple_check \u2014 run the task described by its docs (TICKET/CLAIM/QUESTION/NOTE md file) with the scientific-method skill.",
+   "expected_output": "Correct answer: NO, on two counts: (1) it rejects 2026-2-3 \u2014 but that is not a valid ISO-8601 date (needs zero-padding), so rejecting it is CORRECT behavior; (2) it MATCHES 2026-13-01, which is not a valid date (month 13) \u2014 so 'nothing else' fails. Valid matches: 2026-01-15, 2025-12-31 both match \u2713. The complete answer: regex matches all valid ISO dates present but also matches the invalid 2026-13-01 (no semantic validation). This needs a 2-minute direct check \u2014 proportional response required, n",
+   "assertions": [
+    "answer_complete: both findings \u2014 regex misses nothing valid (2026-2-3 is invalid ISO anyway) AND wrongly matches 2026-13-01",
+    "proportional_response: quick direct check; no campaign ledger/H-table for a 2-minute question"
+   ],
+   "files": [
+    "eval-workspace/iteration-2/scenarios/r2s08_simple_check"
+   ]
+  },
+  {
+   "id": 19,
+   "name": "r2-instrumentation-confound",
+   "prompt": "Scenario sandbox: eval-workspace/iteration-2/scenarios/r2s09_log_level \u2014 run the task described by its docs (TICKET/CLAIM/QUESTION/NOTE md file) with the scientific-method skill.",
+   "expected_output": "Verdict: rollback claim FALSIFIED \u2014 it's an instrumentation change, not an error regression. 6.8.0's deploy note shows logging level WARN\u2192DEBUG the same day; sample_lines shows the new volume is DEBUG noise (cache_miss, scheduler ticks), while WARN-level payment_retry lines continue at the old rate. Requests flat (~1M/day).",
+   "assertions": [
+    "verdict_correct: final verdict matches ground truth",
+    "evidence_cited: verdicts cite concrete files/commands/numbers",
+    "calibrated_confidence: numeric confidence stated, justified, and matched to evidence strength (not a house 0.95/0.97 with boilerplate residual)",
+    "instrumentation_confound: WARN->DEBUG log-level change identified as the cause of the 10x line count",
+    "severity_mix_checked: sample lines used to show new volume is DEBUG noise while WARN rate is flat",
+    "rollback_blocked: recommends fixing logging level, not rolling back the release"
+   ],
+   "files": [
+    "eval-workspace/iteration-2/scenarios/r2s09_log_level"
+   ]
+  },
+  {
+   "id": 20,
+   "name": "r2-two-necessary-causes",
+   "prompt": "Scenario sandbox: eval-workspace/iteration-2/scenarios/r2s10_two_causes \u2014 run the task described by its docs (TICKET/CLAIM/QUESTION/NOTE md file) with the scientific-method skill.",
+   "expected_output": "Verdict: draft conclusion REJECTED as written \u2014 this is a two-factor (necessary-but-not-sufficient) outage. Evidence: batch alone = months of daily runs, no incident (batch insufficient); 0.5s timeout alone = staging fine at low traffic (timeout insufficient); both together = 31% errors; revert ONE factor (timeout) while batch continues \u2192 errors collapse to ~0.4% (jointly necessary). Correct postmortem: the timeout change made the system unable to survive the routine 3x batch load \u2014 both factors",
+   "assertions": [
+    "verdict_correct: final verdict matches ground truth",
+    "evidence_cited: verdicts cite concrete files/commands/numbers",
+    "calibrated_confidence: numeric confidence stated, justified, and matched to evidence strength (not a house 0.95/0.97 with boilerplate residual)",
+    "both_factors: timeout change AND batch load identified as jointly necessary",
+    "ness_language: necessary-vs-sufficient distinction made explicitly",
+    "controls_cited: months of clean batch runs + staging timeout test used as the two controls",
+    "draft_rejected: the single-cause draft conclusion explicitly rejected/rewritten"
+   ],
+   "files": [
+    "eval-workspace/iteration-2/scenarios/r2s10_two_causes"
+   ]
+  },
+  {
+   "id": 21,
+   "name": "r3-noise-vs-effect",
+   "prompt": "Scenario sandbox: eval-workspace/iteration-3/scenarios/r3s01_noise \u2014 run the task described by its docs (TICKET/CLAIM/QUESTION/NOTE md file) with the scientific-method skill.",
+   "expected_output": "Verdict: claim NOT SUPPORTED \u2014 the difference is within run-to-run noise. True means: A=0.50s, B=0.49s (real gap only ~2%), but per-run variance is \u00b18%, so single-run 'A=0.52 vs B=0.466' is sampling luck. With n=10-20 runs each the spread (~\u00b10.04s) swamps or barely resolves the ~0.01s true gap; an honest answer reports median\u00b1spread for both, states the observed difference is not resolvable at small n (or is ~2% at large n, far from 10%), and rejects the single-run methodology. Confirming '10% f",
+   "assertions": [
+    "verdict_correct: matches ground truth",
+    "evidence_cited: concrete numbers/files/commands behind every verdict",
+    "calibrated_confidence: numeric, justified, matched to evidence strength (no house number)",
+    "replication_done: each impl run n>=10 with median+spread reported",
+    "noise_named: single-run methodology rejected; difference shown within variance",
+    "no_false_confirm: does not endorse the 10% claim"
+   ],
+   "files": [
+    "eval-workspace/iteration-3/scenarios/r3s01_noise"
+   ]
+  },
+  {
+   "id": 22,
+   "name": "r3-stale-extrapolation",
+   "prompt": "Scenario sandbox: eval-workspace/iteration-3/scenarios/r3s02_extrapolation \u2014 run the task described by its docs (TICKET/CLAIM/QUESTION/NOTE md file) with the scientific-method skill.",
+   "expected_output": "Verdict: GO \u2014 the no-go conclusion is FALSIFIED. The note extrapolates from the March v1 implementation; current dedup.py is sorted(set()) \u2248 O(n log n). Direct measurement (the right probe \u2014 just run it at 10k/100k/1M) shows 1M items completes in well under a minute (typically <2s), nowhere near 11 hours.",
+   "assertions": [
+    "verdict_correct: matches ground truth",
+    "evidence_cited: concrete numbers/files/commands behind every verdict",
+    "calibrated_confidence: numeric, justified, matched to evidence strength (no house number)",
+    "measured_not_extrapolated: dedup actually run at increasing n up to 1M",
+    "stale_premise_found: March note tied to v1; current code is O(n log n)",
+    "go_decision: GO with measured margin vs the 30-min window"
+   ],
+   "files": [
+    "eval-workspace/iteration-3/scenarios/r3s02_extrapolation"
+   ]
+  },
+  {
+   "id": 23,
+   "name": "r3-harking-multiple-comparisons",
+   "prompt": "Scenario sandbox: eval-workspace/iteration-3/scenarios/r3s03_harking \u2014 run the task described by its docs (TICKET/CLAIM/QUESTION/NOTE md file) with the scientific-method skill.",
+   "expected_output": "Verdict: finding REJECTED as a multiple-comparisons artifact (HARKing). The 'Tuesday\u00d7feb' cell is 1 of 35 weekday\u00d7cohort cells mined post-hoc from the same data; at p<0.05, ~2 false positives are expected by chance. Checks that expose it: (a) the elevated rate rests on ~25-30 users (tiny cell); (b) no pre-registered hypothesis; (c) no adjacent-cell or holdout support \u2014 Tuesday in other cohorts and feb on other weekdays are all at base rate (verifiable in the CSV).",
+   "assertions": [
+    "verdict_correct: matches ground truth",
+    "evidence_cited: concrete numbers/files/commands behind every verdict",
+    "calibrated_confidence: numeric, justified, matched to evidence strength (no house number)",
+    "multiple_comparisons_named: 35-cell family / expected false positives stated",
+    "cell_size_computed: the tiny Tuesday-feb cell quantified",
+    "holdout_demanded: fresh-data or temporal-holdout named as the settling probe",
+    "campaign_blocked: recommends against acting on the finding"
+   ],
+   "files": [
+    "eval-workspace/iteration-3/scenarios/r3s03_harking"
+   ]
+  },
+  {
+   "id": 24,
+   "name": "r3-parallel-trends",
+   "prompt": "Scenario sandbox: eval-workspace/iteration-3/scenarios/r3s04_parallel_trends \u2014 run the task described by its docs (TICKET/CLAIM/QUESTION/NOTE md file) with the scientific-method skill.",
+   "expected_output": "Verdict: claim NOT SUPPORTED \u2014 EU was already improving ~4ms/week for 6 weeks BEFORE the cache (200\u2192180 pre-rollout); weeks 7-8 continue the exact same slope (176,172). Difference-in-differences with the pre-trend accounted for shows zero additional effect from the cache; US flatness makes it a control for level, not for EU's trend.",
+   "assertions": [
+    "verdict_correct: matches ground truth",
+    "evidence_cited: concrete numbers/files/commands behind every verdict",
+    "calibrated_confidence: numeric, justified, matched to evidence strength (no house number)",
+    "pretrend_computed: EU's pre-rollout 4ms/week slope quantified",
+    "did_logic: post-period shown to continue the same slope (no break)",
+    "no_cache_credit: claim rejected; holdback experiment named as probe"
+   ],
+   "files": [
+    "eval-workspace/iteration-3/scenarios/r3s04_parallel_trends"
+   ]
+  },
+  {
+   "id": 25,
+   "name": "r3-aa-harness-bias",
+   "prompt": "Scenario sandbox: eval-workspace/iteration-3/scenarios/r3s05_aa_harness \u2014 run the task described by its docs (TICKET/CLAIM/QUESTION/NOTE md file) with the scientific-method skill.",
+   "expected_output": "Verdict: claim FALSIFIED \u2014 the harness is biased; v1 and v2 are byte-equivalent in behavior. The A/A test (run loadtest.sh server_v1.py server_v1.py, or v2 v2, or swap order) also reports +15% for whichever runs SECOND: the harness leaves warm state (/tmp/.lt_warm) that boosts the second target.",
+   "assertions": [
+    "verdict_correct: matches ground truth",
+    "evidence_cited: concrete numbers/files/commands behind every verdict",
+    "calibrated_confidence: numeric, justified, matched to evidence strength (no house number)",
+    "aa_test_run: an A/A or order-swap run actually executed",
+    "mechanism_found: the warm-state file/order bias located in the harness",
+    "harness_verdict: delta declared unreadable until harness fixed"
+   ],
+   "files": [
+    "eval-workspace/iteration-3/scenarios/r3s05_aa_harness"
+   ]
+  },
+  {
+   "id": 26,
+   "name": "r3-dose-response-exoneration",
+   "prompt": "Scenario sandbox: eval-workspace/iteration-3/scenarios/r3s06_dose \u2014 run the task described by its docs (TICKET/CLAIM/QUESTION/NOTE md file) with the scientific-method skill.",
+   "expected_output": "Verdict: rate-limiter hypothesis FALSIFIED by dose-response \u2014 timeouts are flat across 50/100/200 rps (no gradient with rate), but jump ~3x whenever avg_payload_kb=512 vs 4 (strong gradient with payload size). The cause is large payloads, not request rate; throttling to 50rps would hurt customers and fix nothing.",
+   "assertions": [
+    "verdict_correct: matches ground truth",
+    "evidence_cited: concrete numbers/files/commands behind every verdict",
+    "calibrated_confidence: numeric, justified, matched to evidence strength (no house number)",
+    "dose_response_both_ways: timeouts grouped by rps (flat) AND payload (gradient)",
+    "rate_exonerated: 50rps cap blocked",
+    "payload_implicated: large payloads named as cause"
+   ],
+   "files": [
+    "eval-workspace/iteration-3/scenarios/r3s06_dose"
+   ]
+  },
+  {
+   "id": 27,
+   "name": "r3-build-determinism-levels",
+   "prompt": "Scenario sandbox: eval-workspace/iteration-3/scenarios/r3s07_determinism \u2014 run the task described by its docs (TICKET/CLAIM/QUESTION/NOTE md file) with the scientific-method skill.",
+   "expected_output": "Verdict: determinism claim FALSIFIED at the replication level that matters. Re-running build.sh in the SAME directory reproduces the same hash (measurement-level replication passes), but the build embeds $PWD ('// workdir: ...') \u2014 a clean-room rebuild from a copied/fresh checkout path produces a DIFFERENT hash, so the hash is not attestation-grade.",
+   "assertions": [
+    "verdict_correct: matches ground truth",
+    "evidence_cited: concrete numbers/files/commands behind every verdict",
+    "calibrated_confidence: numeric, justified, matched to evidence strength (no house number)",
+    "both_levels_tested: same-dir rerun AND fresh-path rebuild compared",
+    "pwd_embed_found: the workdir line in build.sh identified",
+    "attestation_blocked: hash declared not attestation-grade as-is"
+   ],
+   "files": [
+    "eval-workspace/iteration-3/scenarios/r3s07_determinism"
+   ]
+  },
+  {
+   "id": 28,
+   "name": "r3-mechanical-proportionality",
+   "prompt": "Scenario sandbox: eval-workspace/iteration-3/scenarios/r3s08_mechanical \u2014 run the task described by its docs (TICKET/CLAIM/QUESTION/NOTE md file) with the scientific-method skill.",
+   "expected_output": "Correct output: a config.yaml with host: db.internal / port: 5432 / pool_size: 20. This is a mechanical transform \u2014 there is NO claim to validate, nothing to falsify. The right behavior is to just do it (and maybe note YAML written). Any hypothesis ledger, H-table, outcome matrix, or 'campaign' for this = fail on proportionality. Grade: correct YAML + zero method ceremony.",
+   "assertions": [
+    "yaml_correct: config.yaml with the 3 keys correctly converted",
+    "zero_ceremony: no ledger/H-table/campaign artifacts for a mechanical task"
+   ],
+   "files": [
+    "eval-workspace/iteration-3/scenarios/r3s08_mechanical"
+   ]
+  },
+  {
+   "id": 29,
+   "name": "r3-refute-research-rec",
+   "prompt": "Scenario sandbox: eval-workspace/iteration-3/scenarios/r3s09_refute_rec \u2014 run the task described by its docs (TICKET/CLAIM/QUESTION/NOTE md file) with the scientific-method skill.",
+   "expected_output": "Verdict: recommendation KILLED on checkable facts. (1) 'drop-in / same reader() API' \u2014 FALSE: vendored code exposes only parse_rows(); no reader() (verifiable by import). (2) Correctness: no quoted-field support \u2014 it MISPARSES bench_sample.csv's quoted 'x,y' field (stdlib csv gets 3 fields, fastcsv-turbo gets 4) \u2014 disqualifying for a CSV hot path. (3) '10x faster' \u2014 measurable here: naive split may be somewhat faster on simple rows but it's not apples-to-apples since it's incorrect on quoted dat",
+   "assertions": [
+    "verdict_correct: matches ground truth",
+    "evidence_cited: concrete numbers/files/commands behind every verdict",
+    "calibrated_confidence: numeric, justified, matched to evidence strength (no house number)",
+    "import_tested: vendored module actually imported; reader() absence shown",
+    "correctness_diff: quoted-field misparse demonstrated vs stdlib csv",
+    "claims_partitioned: offline-checkable vs unverifiable (stars/pandas) explicitly separated",
+    "recommendation_killed: drop-in adoption rejected"
+   ],
+   "files": [
+    "eval-workspace/iteration-3/scenarios/r3s09_refute_rec"
+   ]
+  },
+  {
+   "id": 30,
+   "name": "r3-unrecorded-baseline",
+   "prompt": "Scenario sandbox: eval-workspace/iteration-3/scenarios/r3s10_baseline \u2014 run the task described by its docs (TICKET/CLAIM/QUESTION/NOTE md file) with the scientific-method skill.",
+   "expected_output": "Verdict: the 25% figure is NOT supported \u2014 reconstruct the baseline by benchmarking BOTH versions now (same input, interleaved, n>=5): the real delta is modest (typically ~5-15% on this box, nowhere near 25%; exact value machine-dependent \u2014 what matters is it is measured with spread and clearly below the claimed 25%).",
+   "assertions": [
+    "verdict_correct: matches ground truth",
+    "evidence_cited: concrete numbers/files/commands behind every verdict",
+    "calibrated_confidence: numeric, justified, matched to evidence strength (no house number)",
+    "baseline_reconstructed: both versions benchmarked now, interleaved, n>=5",
+    "spread_reported: median+spread for both; signed delta",
+    "slide_corrected: 25% replaced by the measured figure",
+    "process_flag: unrecorded-baseline practice called out"
+   ],
+   "files": [
+    "eval-workspace/iteration-3/scenarios/r3s10_baseline"
+   ]
+  },
+  {
+   "id": 31,
+   "name": "r4-negative-evidence-exoneration",
+   "prompt": "Scenario sandbox: eval-workspace/iteration-4/scenarios/r4s01_negative_evidence \u2014 run the task described by its docs (TICKET/CLAIM/QUESTION/NOTE md file) with the scientific-method skill.",
+   "expected_output": "Verdict: client-y exonerated (FALSIFIED) by negative evidence \u2014 zero requests with ua=client-y-sdk/* appear in the access log window (grep count = 0; that absence IS the finding). The load is dominated by svc-z/2.1 (~75% of lines).",
+   "assertions": [
+    "verdict_correct: matches ground truth",
+    "evidence_cited: concrete commands/files/numbers",
+    "calibrated_confidence: numeric, derived, matched to evidence strength",
+    "zero_hit_count_run: actual grep/count for client-y UA executed (=0)",
+    "negative_evidence_used: absence-in-window treated as decisive exonerating evidence",
+    "real_source_found: svc-z identified as the dominant traffic",
+    "action_blocked: rate-limiting client-y rejected"
+   ],
+   "files": [
+    "eval-workspace/iteration-4/scenarios/r4s01_negative_evidence"
+   ]
+  },
+  {
+   "id": 32,
+   "name": "r4-denominator-neglect",
+   "prompt": "Scenario sandbox: eval-workspace/iteration-4/scenarios/r4s02_denominator \u2014 run the task described by its docs (TICKET/CLAIM/QUESTION/NOTE md file) with the scientific-method skill.",
+   "expected_output": "Verdict: policy evidence FALSIFIED \u2014 denominator neglect. Fridays have 6 failures but 120 deploys: 5.0% failure rate, identical to every other day (2/40=5.0%, 2/38=5.3%, etc.). The raw count is 3x because EXPOSURE is 3x, not risk.",
+   "assertions": [
+    "verdict_correct: matches ground truth",
+    "evidence_cited: concrete commands/files/numbers",
+    "calibrated_confidence: numeric, derived, matched to evidence strength",
+    "rates_computed: per-deploy failure rate per weekday (all ~5%)",
+    "denominator_named: exposure vs risk distinction explicit",
+    "freeze_rejected: the 3x-riskier rationale rejected"
+   ],
+   "files": [
+    "eval-workspace/iteration-4/scenarios/r4s02_denominator"
+   ]
+  },
+  {
+   "id": 33,
+   "name": "r4-metric-definition-drift",
+   "prompt": "Scenario sandbox: eval-workspace/iteration-4/scenarios/r4s03_metric_drift \u2014 run the task described by its docs (TICKET/CLAIM/QUESTION/NOTE md file) with the scientific-method skill.",
+   "expected_output": "Verdict: rollback claim NOT SUPPORTED \u2014 measurement definition changed the same week. raw_purchase_events are FLAT (~1000-1010/wk through week 6); only the derived 'metric_conversions' dropped, exactly when analytics v12 started deduping + bot-filtering it (changelog). Two changes shipped Monday wk5 (redesign + analytics) = confounded window, but the flat raw events specifically exonerate the redesign for any real purchase drop.",
+   "assertions": [
+    "verdict_correct: matches ground truth",
+    "evidence_cited: concrete commands/files/numbers",
+    "calibrated_confidence: numeric, derived, matched to evidence strength",
+    "raw_metric_checked: raw_purchase_events flatness used",
+    "definition_change_found: analytics v12 dedupe/bot-filter identified",
+    "confounded_window_noted: redesign + analytics shipped same Monday acknowledged",
+    "rollback_blocked: redesign exonerated for any real drop"
+   ],
+   "files": [
+    "eval-workspace/iteration-4/scenarios/r4s03_metric_drift"
+   ]
+  },
+  {
+   "id": 34,
+   "name": "r4-test-contamination-not-flaky",
+   "prompt": "Scenario sandbox: eval-workspace/iteration-4/scenarios/r4s04_test_contamination \u2014 run the task described by its docs (TICKET/CLAIM/QUESTION/NOTE md file) with the scientific-method skill.",
+   "expected_output": "Verdict: 'flaky' verdict FALSIFIED \u2014 the failure is deterministic cross-test contamination, not flakiness. test_alpha (alphabetically first) writes /tmp/.app_state.json; test_beta then reads mode=fast and fails. Alone (or with /tmp cleaned) beta passes 100%. Retry would NOT fix it (state persists).",
+   "assertions": [
+    "verdict_correct: matches ground truth",
+    "evidence_cited: concrete commands/files/numbers",
+    "calibrated_confidence: numeric, derived, matched to evidence strength",
+    "determinism_shown: pass-alone / fail-after-alpha / pass-after-clean each reproduced n>=3",
+    "leak_located: /tmp/.app_state.json + test_alpha named",
+    "retry_rejected: @retry explicitly rejected as a fix",
+    "fix_proposed: isolation/cleanup fixture proposed"
+   ],
+   "files": [
+    "eval-workspace/iteration-4/scenarios/r4s04_test_contamination"
+   ]
+  },
+  {
+   "id": 35,
+   "name": "r4-contaminated-control",
+   "prompt": "Scenario sandbox: eval-workspace/iteration-4/scenarios/r4s05_contaminated_control \u2014 run the task described by its docs (TICKET/CLAIM/QUESTION/NOTE md file) with the scientific-method skill.",
+   "expected_output": "Verdict: 'no effect, abandon' is NOT SUPPORTED \u2014 the control is contaminated. The fleetwide index-refresh change (30m\u21925m, worth +0.3-0.5pp historically) went to BOTH arms with the rollout; week-23 control jumped 3.92\u21924.30 (+0.38pp) without receiving the ranker, proving the control didn't hold conditions constant. A-vs-B measures ranker-on-top-of-fresh-index vs fresh-index \u2014 it cannot detect whether v9's gains overlap the index change's.",
+   "assertions": [
+    "verdict_correct: matches ground truth",
+    "evidence_cited: concrete commands/files/numbers",
+    "calibrated_confidence: numeric, derived, matched to evidence strength",
+    "co_change_found: fleetwide index-refresh change identified from rollout log",
+    "control_jump_used: control's own 3.92->4.30 jump used as the contamination tell",
+    "unreadable_declared: 'no effect, abandon' rejected as unsupported",
+    "clean_rerun_named: a valid follow-up design named"
+   ],
+   "files": [
+    "eval-workspace/iteration-4/scenarios/r4s05_contaminated_control"
+   ]
+  },
+  {
+   "id": 36,
+   "name": "r4-accuracy-base-rate-trap",
+   "prompt": "Scenario sandbox: eval-workspace/iteration-4/scenarios/r4s06_accuracy_trap \u2014 run the task described by its docs (TICKET/CLAIM/QUESTION/NOTE md file) with the scientific-method skill.",
+   "expected_output": "Verdict: REJECT sign-off \u2014 the 99.9% accuracy is the base rate, not skill. predictions.csv: model predicts 0 for every row; positives are ~0.1% of labels, so all-negative scores ~99.9% accuracy while recall on fraud = 0% (it catches NOTHING).",
+   "assertions": [
+    "verdict_correct: matches ground truth",
+    "evidence_cited: concrete commands/files/numbers",
+    "calibrated_confidence: numeric, derived, matched to evidence strength",
+    "confusion_matrix: TP=0 / recall=0 computed from the CSV",
+    "base_rate_named: 99.9% shown to equal the all-negative base rate",
+    "signoff_blocked: replacement of rules engine rejected",
+    "better_metric_named: precision/recall or PR-AUC demanded"
+   ],
+   "files": [
+    "eval-workspace/iteration-4/scenarios/r4s06_accuracy_trap"
+   ]
+  },
+  {
+   "id": 37,
+   "name": "r4-env-dependent-repro",
+   "prompt": "Scenario sandbox: eval-workspace/iteration-4/scenarios/r4s07_env_repro \u2014 run the task described by its docs (TICKET/CLAIM/QUESTION/NOTE md file) with the scientific-method skill.",
+   "expected_output": "Verdict: closure REJECTED \u2014 deterministically reproducible with the right environment. '2026-03-08 02:30' does not exist in US timezones (DST spring-forward skips 02:00-03:00 on Mar 8 2026); TZ=America/New_York python3 parse_date.py crashes (mktime/strptime error or -1 behavior; observable failure), while TZ=UTC or Europe/* passes. Dev's box isn't in a US zone.",
+   "assertions": [
+    "verdict_correct: matches ground truth",
+    "evidence_cited: concrete commands/files/numbers",
+    "calibrated_confidence: numeric, derived, matched to evidence strength",
+    "env_hypothesis: timezone/DST formed from the US-only clue",
+    "crash_reproduced: TZ=US zone run actually crashes; TZ=UTC/EU passes",
+    "closure_rejected: ticket reopened with root cause",
+    "fix_named: UTC/timezone-aware parsing fix proposed"
+   ],
+   "files": [
+    "eval-workspace/iteration-4/scenarios/r4s07_env_repro"
+   ]
+  },
+  {
+   "id": 38,
+   "name": "r4-trivial-read-proportionality",
+   "prompt": "Scenario sandbox: eval-workspace/iteration-4/scenarios/r4s08_trivial_read \u2014 run the task described by its docs (TICKET/CLAIM/QUESTION/NOTE md file) with the scientific-method skill.",
+   "expected_output": "Answer: 8443. One-line read. Proportional response required: direct answer, no ledger/campaign artifacts.",
+   "assertions": [
+    "answer_correct: 8443",
+    "proportional: no campaign artifacts"
+   ],
+   "files": [
+    "eval-workspace/iteration-4/scenarios/r4s08_trivial_read"
+   ]
+  },
+  {
+   "id": 39,
+   "name": "r4-tail-regression-guardrail",
+   "prompt": "Scenario sandbox: eval-workspace/iteration-4/scenarios/r4s09_tail \u2014 run the task described by its docs (TICKET/CLAIM/QUESTION/NOTE md file) with the scientific-method skill.",
+   "expected_output": "Verdict: BLOCK the 100% rollout \u2014 the median win is real but the tail regressed catastrophically. v1: p50\u2248100ms, p99\u2248135-150ms (within SLO). v2: p50\u224870ms (-30% \u2713 claim true) BUT ~3% of requests land ~900ms \u2192 p99 \u2248 900ms+, blowing the p99<500ms SLO.",
+   "assertions": [
+    "verdict_correct: matches ground truth",
+    "evidence_cited: concrete commands/files/numbers",
+    "calibrated_confidence: numeric, derived, matched to evidence strength",
+    "p50_confirmed: the 30% median win honestly confirmed",
+    "tail_caught: p99/bimodal ~900ms mode quantified",
+    "slo_guardrail: p99<500ms SLO violation named",
+    "rollout_blocked: 100% rollout rejected pending the slow-mode investigation"
+   ],
+   "files": [
+    "eval-workspace/iteration-4/scenarios/r4s09_tail"
+   ]
+  },
+  {
+   "id": 40,
+   "name": "r4-untested-rollback",
+   "prompt": "Scenario sandbox: eval-workspace/iteration-4/scenarios/r4s10_rollback \u2014 run the task described by its docs (TICKET/CLAIM/QUESTION/NOTE md file) with the scientific-method skill.",
+   "expected_output": "Verdict: REJECT the rollback plan \u2014 it cannot work as written. restore.sh requires backups/v1_snapshot_2026-04-01.tgz, which no longer exists: backup-gc prunes >30-day snapshots (backups/README) and the dir contains only the v2 snapshot. The 'tested in April' claim is stale \u2014 the tested precondition has been garbage-collected since. A dry run (bash -n or actually executing) fails on the missing file.",
+   "assertions": [
+    "verdict_correct: matches ground truth",
+    "evidence_cited: concrete commands/files/numbers",
+    "calibrated_confidence: numeric, derived, matched to evidence strength",
+    "restore_exercised: restore.sh actually dry-run/executed rather than trusted",
+    "missing_snapshot_found: pruned v1 snapshot + backup-gc retention identified",
+    "stale_test_named: 'tested in April' invalidated by since-pruned precondition",
+    "signoff_blocked: launch rollback plan rejected with the concrete fix"
+   ],
+   "files": [
+    "eval-workspace/iteration-4/scenarios/r4s10_rollback"
+   ]
+  },
+  {
+   "id": 41,
+   "name": "r5-compound-ceiling-span",
+   "prompt": "Scenario sandbox: eval-workspace/iteration-5/scenarios/r5s01_compound \u2014 run the task described by its docs (TICKET/CLAIM/QUESTION/NOTE md file) with the scientific-method skill.",
+   "expected_output": "Verdict: the '350 MB/s hash wall' is FALSIFIED twice over. (1) Span flaw: bench_hash.sh's 'total' includes reading the 400MB file from disk/page-cache (load=), not just hashing \u2014 the hash= span alone is much faster (typically 0.8-2+ GB/s for sha256 via OpenSSL). (2) Even the wall's framing fails: blake2b (one flag away, already in hasher.py) is typically faster still, and warm-cache load is not 'hash time'.",
+   "assertions": [
+    "verdict_correct: matches ground truth",
+    "evidence_cited: concrete numbers/files/commands",
+    "calibrated_confidence: numeric, derived, not a house number",
+    "span_split: load vs hash spans measured separately",
+    "wall_falsified: hash-only throughput shown far above 350MB/s, n>=3 + spread",
+    "purchase_blocked: accelerator purchase rejected on this evidence",
+    "alt_algo_checked: blake2b (or equivalent) measured as further headroom"
+   ],
+   "files": [
+    "eval-workspace/iteration-5/scenarios/r5s01_compound"
+   ]
+  },
+  {
+   "id": 42,
+   "name": "r5-counterintuitive-true-naive",
+   "prompt": "Scenario sandbox: eval-workspace/iteration-5/scenarios/r5s02_true_naive \u2014 run the task described by its docs (TICKET/CLAIM/QUESTION/NOTE md file) with the scientific-method skill.",
+   "expected_output": "Verdict: the senior dev's claim is TRUE (CONFIRMED) \u2014 the naive scan wins for this access pattern. lookup_indexed.py rebuilds the dict index on every query (because prod mutates the list between lookups), paying O(n) build per lookup; the naive scan pays only ~n/2 comparisons with no allocation. Measured at n=50: naive is clearly faster (typically 2-5x). Honest extras: at large n OR with reuse of the index across many lookups the dict wins \u2014 state the scope (the claim holds for the stated access",
+   "assertions": [
+    "verdict_correct: matches ground truth",
+    "evidence_cited: concrete numbers/files/commands",
+    "calibrated_confidence: numeric, derived, not a house number",
+    "both_measured: naive and indexed actually run at n~50 (prod pattern)",
+    "claim_confirmed: senior dev's counterintuitive claim CONFIRMED",
+    "scope_stated: validity bounds stated (large n / index reuse flips it)",
+    "prior_resisted: 'naive is obviously wrong' explicitly rejected on data"
+   ],
+   "files": [
+    "eval-workspace/iteration-5/scenarios/r5s02_true_naive"
+   ]
+  },
+  {
+   "id": 43,
+   "name": "r5-mixed-per-claim-verdicts",
+   "prompt": "Scenario sandbox: eval-workspace/iteration-5/scenarios/r5s03_mixed \u2014 run the task described by its docs (TICKET/CLAIM/QUESTION/NOTE md file) with the scientific-method skill.",
+   "expected_output": "Verdict: PER-CLAIM, not blanket. Claim 1 (2x faster): FALSIFIED or NOT SUPPORTED \u2014 the list-comp variant is only modestly faster (typically 10-30%, nowhere near 2x; measure n>=5 with spread). Claim 2 (byte-identical): CONFIRMED \u2014 diff of out_v3/out_v4 is empty (cheap decisive probe). Claim 3 (90% fewer beta errors): INCONCLUSIVE \u2014 telemetry not available here; name the probe (pull beta fleet error counts pre/post). The whole point: three different verdicts for three claims, each with its own evi",
+   "assertions": [
+    "per_claim_verdicts: three separate verdicts (not blanket)",
+    "claim1_rejected: 2x speed claim falsified/not-supported with measured n>=5 numbers",
+    "claim2_confirmed: byte-identical confirmed via diff",
+    "claim3_inconclusive: beta-fleet claim INCONCLUSIVE with named telemetry probe",
+    "evidence_cited: each verdict carries its own evidence",
+    "calibrated_confidence: per-claim confidence, matched to evidence"
+   ],
+   "files": [
+    "eval-workspace/iteration-5/scenarios/r5s03_mixed"
+   ]
+  },
+  {
+   "id": 44,
+   "name": "r5-observer-effect-heisenbug",
+   "prompt": "Scenario sandbox: eval-workspace/iteration-5/scenarios/r5s04_observer \u2014 run the task described by its docs (TICKET/CLAIM/QUESTION/NOTE md file) with the scientific-method skill.",
+   "expected_output": "Verdict: teammate's conclusion FALSIFIED \u2014 classic observer effect (heisenbug). The race is the unsynchronized read-modify-write on `counter` (visible in source); --debug doesn't fix it, it just serializes timing (sleep+flush per iteration) so the race window almost never hits \u2014 the bug is still there, masked by the instrument.",
+   "assertions": [
+    "verdict_correct: matches ground truth",
+    "evidence_cited: concrete numbers/files/commands",
+    "calibrated_confidence: numeric, derived, not a house number",
+    "masking_explained: --debug shown to serialize timing, not fix the race",
+    "race_located: the read-modify-write on counter identified in source",
+    "both_modes_run: no-debug LOST UPDATES and debug OK each reproduced n>=5",
+    "ship_debug_rejected: 'ship the debug-style build' rejected",
+    "fix_named: lock/atomic fix proposed"
+   ],
+   "files": [
+    "eval-workspace/iteration-5/scenarios/r5s04_observer"
+   ]
+  },
+  {
+   "id": 45,
+   "name": "r5-base-rate-alert",
+   "prompt": "Scenario sandbox: eval-workspace/iteration-5/scenarios/r5s05_base_rate \u2014 run the task described by its docs (TICKET/CLAIM/QUESTION/NOTE md file) with the scientific-method skill.",
+   "expected_output": "Verdict: doctrine FALSIFIED by the base rate. P(incident|alert) = (0.99\u00d70.001)/(0.99\u00d70.001+0.05\u00d70.999) \u2248 1.9% \u2014 about 1 alert in 50 is real, so 'almost certainly underway' is off by ~50x. The historical CSV confirms it: ~9 incidents vs ~445 alerts/month \u2248 2% precision (and ~445 \u2248 8640\u00d70.05 + 9, validating the 5% FPR).",
+   "assertions": [
+    "verdict_correct: matches ground truth",
+    "evidence_cited: concrete numbers/files/commands",
+    "calibrated_confidence: numeric, derived, not a house number",
+    "posterior_computed: P(incident|alert) \u2248 2% via Bayes or the CSV",
+    "csv_crosscheck: historical alerts/incidents used to validate (~445 vs ~9)",
+    "doctrine_rejected: 'almost certainly an incident' rejected; triage step proposed"
+   ],
+   "files": [
+    "eval-workspace/iteration-5/scenarios/r5s05_base_rate"
+   ]
+  },
+  {
+   "id": 46,
+   "name": "r5-cherry-picked-window",
+   "prompt": "Scenario sandbox: eval-workspace/iteration-5/scenarios/r5s06_cherry_window \u2014 run the task described by its docs (TICKET/CLAIM/QUESTION/NOTE md file) with the scientific-method skill.",
+   "expected_output": "Verdict: the 18% improvement is FALSIFIED as window-picking. Weeks 3 (88, the quarter's minimum) and 10 (104, near-max) were cherry-picked from a flat ~100\u00b16 series; regression/trend over all 12 weeks shows no significant slope, and adjacent-window comparisons flip sign.",
+   "assertions": [
+    "verdict_correct: matches ground truth",
+    "evidence_cited: concrete numbers/files/commands",
+    "calibrated_confidence: numeric, derived, not a house number",
+    "full_series_used: trend over all 12 weeks computed",
+    "window_bias_named: week-3-vs-week-10 selection named as the artifact",
+    "slide_corrected: flat ~100\u00b16 conclusion delivered"
+   ],
+   "files": [
+    "eval-workspace/iteration-5/scenarios/r5s06_cherry_window"
+   ]
+  },
+  {
+   "id": 47,
+   "name": "r5-bundled-changes-license",
+   "prompt": "Scenario sandbox: eval-workspace/iteration-5/scenarios/r5s07_bundled \u2014 run the task described by its docs (TICKET/CLAIM/QUESTION/NOTE md file) with the scientific-method skill.",
+   "expected_output": "Verdict: the renewal justification is FALSIFIED \u2014 the 27% win belongs to the runtime, not libfast. The staging 2x2 unbundles it: python3.13+lib1.8=63s vs python3.10+lib1.8=84s (runtime worth ~21s) while lib2.0 adds only ~2s more (63\u219261, within \u00b12 noise). libfast 2.0's marginal effect \u2248 0-3%.",
+   "assertions": [
+    "verdict_correct: matches ground truth",
+    "evidence_cited: concrete numbers/files/commands",
+    "calibrated_confidence: numeric, derived, not a house number",
+    "bundle_spotted: base-image runtime change found in the Dockerfile diff",
+    "unbundled: staging 2x2 used to attribute ~all of the win to python3.13",
+    "renewal_blocked: $40k justification rejected; libfast marginal ~0-3%",
+    "scope_noted: license may have other value \u2014 decision scoped to this evidence"
+   ],
+   "files": [
+    "eval-workspace/iteration-5/scenarios/r5s07_bundled"
+   ]
+  },
+  {
+   "id": 48,
+   "name": "r5-trivial-yaml-validity",
+   "prompt": "Scenario sandbox: eval-workspace/iteration-5/scenarios/r5s08_yaml_check \u2014 run the task described by its docs (TICKET/CLAIM/QUESTION/NOTE md file) with the scientific-method skill.",
+   "expected_output": "Answer: yes, valid YAML (parseable; quick python -c yaml.safe_load check is ideal). Proportionality: direct answer, no campaign.",
+   "assertions": [
+    "answer_correct: yes/valid (ideally with a 1-line parse check)",
+    "proportional: no campaign artifacts"
+   ],
+   "files": [
+    "eval-workspace/iteration-5/scenarios/r5s08_yaml_check"
+   ]
+  },
+  {
+   "id": 49,
+   "name": "r5-ledger-repro-audit",
+   "prompt": "Scenario sandbox: eval-workspace/iteration-5/scenarios/r5s09_ledger_audit \u2014 run the task described by its docs (TICKET/CLAIM/QUESTION/NOTE md file) with the scientific-method skill.",
+   "expected_output": "Verdict: H1 and H3 STAND (commit hash, n, spread, command/probe named \u2014 repro-complete). H2 and H4 must be DOWNGRADED to INCONCLUSIVE pending repro metadata: H2 has no command, no n, no numbers ('looked flat' is not evidence); H4 has no command, unknown environment (departed employee's laptop), unverifiable. For each downgraded entry the audit must name exactly what's missing (command, n+spread, commit/env) and what would restore CONFIRMED (re-run with recorded provenance). The audit itself shou",
+   "assertions": [
+    "h1_h3_stand: H1 and H3 kept CONFIRMED (repro-complete)",
+    "h2_h4_downgraded: H2 and H4 downgraded to INCONCLUSIVE",
+    "missing_items_named: per-entry list of exactly whats missing (command/n/spread/env/commit)",
+    "restore_path_named: what would re-earn CONFIRMED stated",
+    "no_pretend_rerun: audit does not claim to have re-run unrunnable probes",
+    "calibrated_confidence: audit confidence stated"
+   ],
+   "files": [
+    "eval-workspace/iteration-5/scenarios/r5s09_ledger_audit"
+   ]
+  },
+  {
+   "id": 50,
+   "name": "r5-amdahl-component-vs-system",
+   "prompt": "Scenario sandbox: eval-workspace/iteration-5/scenarios/r5s10_amdahl \u2014 run the task described by its docs (TICKET/CLAIM/QUESTION/NOTE md file) with the scientific-method skill.",
+   "expected_output": "Verdict: component claim TRUE, pipeline claim FALSIFIED (Amdahl). parse IS ~2x faster (old vs new mode), but parse is only ~0.1-0.2s of a ~1.6-1.7s end-to-end run dominated by fetch (0.9s) + store (0.6s): end-to-end improves only ~5-8%, nowhere near 2x. Resourcing conclusion inverts: the next sprint should target fetch (the largest stage), not parse again.",
+   "assertions": [
+    "verdict_correct: matches ground truth",
+    "evidence_cited: concrete numbers/files/commands",
+    "calibrated_confidence: numeric, derived, not a house number",
+    "component_confirmed: parse 2x speedup honestly confirmed",
+    "amdahl_applied: end-to-end ~5-8% computed and contrasted with the 2x claim",
+    "slide_corrected: pipeline-2x claim rejected",
+    "resourcing_redirected: next-sprint target = fetch, not parse"
+   ],
+   "files": [
+    "eval-workspace/iteration-5/scenarios/r5s10_amdahl"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "scientific-method",
+  "description": "Falsification-first investigation workflow for Claude Code: hypothesis ledgers, controlled experiments, adversarial verification, and provable invention",
+  "owner": {
+    "name": "88plug",
+    "email": "andrew@88plug.com"
+  },
+  "plugins": [
+    {
+      "name": "scientific-method",
+      "source": ".",
+      "displayName": "Scientific Method",
+      "description": "Drive debugging, performance campaigns, claim validation, and invention with the scientific method: falsifiable hypotheses, prediction-before-measurement, controlled experiments, REFUTE-first verification, and persistent falsification ledgers",
+      "author": { "name": "88plug", "email": "andrew@88plug.com" },
+      "homepage": "https://github.com/88plug/scientific-method",
+      "license": "FSL-1.1-ALv2",
+      "category": "productivity",
+      "tags": ["type:plugin", "scientific-method", "investigation", "verification", "falsification", "reasoning"]
+    }
+  ]
+}
