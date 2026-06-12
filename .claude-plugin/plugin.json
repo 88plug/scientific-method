@@ -3,7 +3,6 @@
   "name": "scientific-method",
   "displayName": "Scientific Method",
   "description": "Falsification-first investigation workflow: convert every assertion into a labeled falsifiable hypothesis, predict before measuring, run controlled experiments, verify findings adversarially (REFUTE-first), and persist verdicts in a hypothesis ledger so killed ideas are never re-attacked",
-  "version": "1.7.2",
   "author": {
     "name": "88plug",
     "email": "andrew@88plug.com"
