@@ -1,5 +1,7 @@
 # scientific-method
 
+[![plugin-validate](https://github.com/88plug/scientific-method/actions/workflows/plugin-validate.yml/badge.svg)](https://github.com/88plug/scientific-method/actions/workflows/plugin-validate.yml)
+
 A Claude Code plugin that turns investigations, debugging sessions,
 performance campaigns, and claim validation into falsification-first
 scientific campaigns.
