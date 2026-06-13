@@ -72,6 +72,13 @@ server, output style, or statusline (a methodology plugin enforces discipline
 over existing tools; it does not need new external capabilities). The hook is
 the only thing that runs automatically, and it only reads `EXPERIMENTS.md`.
 
+## Updating
+
+This plugin ships rolling — every commit is a release. Your installed version
+(`claude plugin list`) and the one in the [88plug catalog](https://github.com/88plug/claude-code-plugins)
+are shown as `vYEAR.MONTH.BUILD`; if they differ, run `/plugin update scientific-method@88plug`.
+With marketplace auto-update enabled you always get the latest automatically.
+
 ## License
 
 [FSL-1.1-ALv2](LICENSE.md) © 2026 [88plug](https://github.com/88plug) — Functional
