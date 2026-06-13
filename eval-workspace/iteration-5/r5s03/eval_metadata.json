@@ -1,0 +1,13 @@
+{
+ "eval_id": 3,
+ "eval_name": "mixed-per-claim-verdicts",
+ "prompt": "see scenarios/r5s03_*",
+ "assertions": [
+  "per_claim_verdicts: three separate verdicts (not blanket)",
+  "claim1_rejected: 2x speed claim falsified/not-supported with measured n>=5 numbers",
+  "claim2_confirmed: byte-identical confirmed via diff",
+  "claim3_inconclusive: beta-fleet claim INCONCLUSIVE with named telemetry probe",
+  "evidence_cited: each verdict carries its own evidence",
+  "calibrated_confidence: per-claim confidence, matched to evidence"
+ ]
+}

@@ -1,0 +1,16 @@
+{
+ "eval_id": 7,
+ "eval_name": "differential-equivalence",
+ "prompt": "see scenarios/r11s07_*",
+ "assertions": [
+  "verdict_correct: matches ground-truth logic",
+  "evidence_executed: claims demonstrated by runs/enumeration, not asserted",
+  "rung_honest: provability rung per claim matches the evidence (no inflation)",
+  "provenance: known art named; search/labeling per invent.md",
+  "claim_chart: element|evidence|rung table where a claim is made",
+  "differential_oracle: legacy as oracle; adversarial + generated inputs; mismatches shrunk",
+  "exhaustive_scope: full enumeration to stated length/alphabet with count",
+  "quirks_preserved: -1 and trailing-number behaviors intact",
+  "residual_honest: beyond-scope equivalence not claimed proven"
+ ]
+}

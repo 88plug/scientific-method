@@ -1,0 +1,11 @@
+{
+ "eval_id": 3,
+ "eval_name": "weak-evidence-calibration",
+ "prompt": "see scenarios/r2s03_*",
+ "assertions": [
+  "calibrated_low_confidence: confidence lands ~0.5-0.75 with the causal-ladder position stated (temporality only)",
+  "lean_with_probe: gives a lean plus a named cheap settling probe (old-kernel canary / backend logging)",
+  "no_overclaim: does not assert the kernel cause at 0.9+",
+  "no_refusal: does not flat-refuse with no lean and no probe"
+ ]
+}

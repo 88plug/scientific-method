@@ -1,0 +1,14 @@
+{
+ "eval_id": 2,
+ "eval_name": "solvable-not-inconclusive",
+ "prompt": "see scenarios/r2s02_*",
+ "assertions": [
+  "verdict_correct: final verdict matches ground truth",
+  "evidence_cited: verdicts cite concrete files/commands/numbers",
+  "calibrated_confidence: numeric confidence stated, justified, and matched to evidence strength (not a house 0.95/0.97 with boilerplate residual)",
+  "did_the_math: TTL equilibrium (~40d x 100/day = 4000) computed",
+  "distribution_checked: per-day row distribution verified uniform/no gaps from the CSV",
+  "not_lazy_inconclusive: does NOT punt to INCONCLUSIVE \u2014 the data was sufficient",
+  "residual_named: the unexplained 5,200 dashboard figure flagged as the open question"
+ ]
+}

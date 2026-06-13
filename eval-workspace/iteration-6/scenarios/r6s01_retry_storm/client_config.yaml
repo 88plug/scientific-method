@@ -1,0 +1,3 @@
+retries: 3
+retry_backoff: none   # immediate retry
+timeout_ms: 500

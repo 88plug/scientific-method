@@ -1,0 +1,14 @@
+{
+ "eval_id": 3,
+ "eval_name": "metric-definition-drift",
+ "prompt": "see scenarios/r4s03_*",
+ "assertions": [
+  "verdict_correct: matches ground truth",
+  "evidence_cited: concrete commands/files/numbers",
+  "calibrated_confidence: numeric, derived, matched to evidence strength",
+  "raw_metric_checked: raw_purchase_events flatness used",
+  "definition_change_found: analytics v12 dedupe/bot-filter identified",
+  "confounded_window_noted: redesign + analytics shipped same Monday acknowledged",
+  "rollback_blocked: redesign exonerated for any real drop"
+ ]
+}

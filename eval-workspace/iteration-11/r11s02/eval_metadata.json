@@ -1,0 +1,15 @@
+{
+ "eval_id": 2,
+ "eval_name": "comparison-sort-lower-bound",
+ "prompt": "see scenarios/r11s02_*",
+ "assertions": [
+  "verdict_correct: matches ground-truth logic",
+  "evidence_executed: claims demonstrated by runs/enumeration, not asserted",
+  "rung_honest: provability rung per claim matches the evidence (no inflation)",
+  "provenance: known art named; search/labeling per invent.md",
+  "claim_chart: element|evidence|rung table where a claim is made",
+  "information_bound: log2(n!) \u2248 n log n arithmetic shown (Stirling)",
+  "class_level: rules out ALL comparison sorts, not the vendor's box",
+  "escape_hatches: radix/average-case/adaptive named"
+ ]
+}

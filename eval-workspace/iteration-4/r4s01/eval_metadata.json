@@ -1,0 +1,14 @@
+{
+ "eval_id": 1,
+ "eval_name": "negative-evidence-exoneration",
+ "prompt": "see scenarios/r4s01_*",
+ "assertions": [
+  "verdict_correct: matches ground truth",
+  "evidence_cited: concrete commands/files/numbers",
+  "calibrated_confidence: numeric, derived, matched to evidence strength",
+  "zero_hit_count_run: actual grep/count for client-y UA executed (=0)",
+  "negative_evidence_used: absence-in-window treated as decisive exonerating evidence",
+  "real_source_found: svc-z identified as the dominant traffic",
+  "action_blocked: rate-limiting client-y rejected"
+ ]
+}

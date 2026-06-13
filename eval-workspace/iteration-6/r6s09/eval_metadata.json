@@ -1,0 +1,12 @@
+{
+ "eval_id": 9,
+ "eval_name": "evidence-env-gate",
+ "prompt": "see scenarios/r6s09_*",
+ "assertions": [
+  "lab_confirmed: the sandbox result honestly confirmed (not dismissed)",
+  "env_gate: sign-off withheld with evidence_env reasoning (lab vs operational)",
+  "gaps_named: bursty load / multi-service / cgroup caps cited as flip-capable",
+  "probe_named: relevant-env test or canaried staged rollout specified",
+  "calibrated_confidence: split confidence (high for lab claim, low/withheld for prod)"
+ ]
+}

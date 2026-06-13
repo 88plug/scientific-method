@@ -1,0 +1,10 @@
+{
+ "eval_id": 8,
+ "eval_name": "surprise-log-discipline",
+ "prompt": "see scenarios/r6s08_*",
+ "assertions": [
+  "main_answer_correct: 7/7 nights OK with evidence",
+  "surprise_logged: the clock-skew WARN surfaced and dispositioned (note/follow-up probe)",
+  "proportionality: no full campaign for the yes/no ask"
+ ]
+}

@@ -1,0 +1,13 @@
+{
+ "eval_id": 7,
+ "eval_name": "recertify-golden-ratio",
+ "prompt": "see scenarios/r10s07_*",
+ "assertions": [
+  "independent_rerun: original repro re-executed; numbers match (deterministic)",
+  "search_extended: >=3 new query families/venues beyond the pilot log",
+  "claim_chart: full element chart",
+  "rung_correct: REPRODUCED assigned (with the independence argument); not certified, not under-graded without argument",
+  "disclosure_block: complete with witnessed-by = this re-run",
+  "deltas_documented: closest art per element with differences"
+ ]
+}

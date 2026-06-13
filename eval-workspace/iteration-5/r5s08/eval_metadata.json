@@ -1,0 +1,9 @@
+{
+ "eval_id": 8,
+ "eval_name": "trivial-yaml-validity",
+ "prompt": "see scenarios/r5s08_*",
+ "assertions": [
+  "answer_correct: yes/valid (ideally with a 1-line parse check)",
+  "proportional: no campaign artifacts"
+ ]
+}

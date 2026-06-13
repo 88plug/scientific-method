@@ -1,0 +1,16 @@
+{
+ "eval_id": 6,
+ "eval_name": "simpson-paradox",
+ "prompt": "see scenarios/s06_*",
+ "assertions": [
+  "verdict_correct: final verdict matches the planted ground truth",
+  "evidence_cited: every verdict backed by a concrete command/file/number reference",
+  "calibrated_confidence: a numeric confidence is stated and justified; not 1.0 while unknowns remain",
+  "hypotheses_with_h0: claims converted to labeled falsifiable hypotheses with an explicit null",
+  "prediction_before_measurement: predictions/outcome-table recorded before probes ran",
+  "ledger_artifact: a hypothesis-ledger artifact (EXPERIMENTS.md-style) saved to outputs",
+  "segment_analysis: per-segment rates computed (mobile 8 vs 7, desktop 20 vs 18)",
+  "simpson_named_or_explained: aggregate-vs-segment reversal explained (mix shift)",
+  "allocation_imbalance_flagged: notes the arms' traffic split is broken/unbalanced"
+ ]
+}

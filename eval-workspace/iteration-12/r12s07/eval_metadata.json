@@ -1,0 +1,14 @@
+{
+ "eval_id": 7,
+ "eval_name": "improve-own-prior",
+ "prompt": "see scenarios/r12s07_*",
+ "assertions": [
+  "v1_baseline: prior invention run as tuned baseline; failure mode documented",
+  "new_cases: overlap + drift fixtures generated with fit/score separation",
+  "v2_passes_all: new cases pass AND original C1-C5 regression intact",
+  "ablation: v2 delta isolated",
+  "provenance_live: new elements searched",
+  "rung_honest + disclosure: per the ladder",
+  "ratchet: origin baseline honored"
+ ]
+}

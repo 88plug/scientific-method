@@ -1,0 +1,14 @@
+{
+ "eval_id": 2,
+ "eval_name": "joint-cause-cut-set",
+ "prompt": "see scenarios/r6s02_*",
+ "assertions": [
+  "verdict_correct: matches ground truth",
+  "evidence_cited: concrete files/commands/numbers",
+  "calibrated_confidence: numeric, derived, matched to evidence",
+  "causal_set: all jointly-necessary factors named (cert expiry + disabled fallback + mis-pointed monitor)",
+  "necessity_evidence: per-factor but-for reasoning",
+  "no_demotion: no single 'root cause' with others demoted to triggers",
+  "actions_all_legs: action items cover fallback re-enable + monitor fix, not just cert renewal"
+ ]
+}

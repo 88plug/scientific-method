@@ -1,0 +1,14 @@
+{
+ "eval_id": 6,
+ "eval_name": "accuracy-base-rate-trap",
+ "prompt": "see scenarios/r4s06_*",
+ "assertions": [
+  "verdict_correct: matches ground truth",
+  "evidence_cited: concrete commands/files/numbers",
+  "calibrated_confidence: numeric, derived, matched to evidence strength",
+  "confusion_matrix: TP=0 / recall=0 computed from the CSV",
+  "base_rate_named: 99.9% shown to equal the all-negative base rate",
+  "signoff_blocked: replacement of rules engine rejected",
+  "better_metric_named: precision/recall or PR-AUC demanded"
+ ]
+}

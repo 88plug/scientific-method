@@ -1,0 +1,14 @@
+{
+ "eval_id": 10,
+ "eval_name": "two-necessary-causes",
+ "prompt": "see scenarios/r2s10_*",
+ "assertions": [
+  "verdict_correct: final verdict matches ground truth",
+  "evidence_cited: verdicts cite concrete files/commands/numbers",
+  "calibrated_confidence: numeric confidence stated, justified, and matched to evidence strength (not a house 0.95/0.97 with boilerplate residual)",
+  "both_factors: timeout change AND batch load identified as jointly necessary",
+  "ness_language: necessary-vs-sufficient distinction made explicitly",
+  "controls_cited: months of clean batch runs + staging timeout test used as the two controls",
+  "draft_rejected: the single-cause draft conclusion explicitly rejected/rewritten"
+ ]
+}

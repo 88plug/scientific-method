@@ -1,0 +1,15 @@
+{
+ "eval_id": 6,
+ "eval_name": "cdc-dedup",
+ "prompt": "see scenarios/r10s06_*",
+ "assertions": [
+  "acceptance_met: all criteria measured and met (or legitimately re-graded) under re-run",
+  "claim_grammar: the [M] achieves [E] vs [B] on [S] template with all slots filled",
+  "claim_chart: element | evidence | verification rung table present and complete",
+  "provenance_search: LIVE search log (venues+queries+dates via WebFetch), closest-found grammar, known art cited and labeled",
+  "rung_honest: certification rung claimed matches the evidence (no inflation)",
+  "disclosure_block: conception/RTP/witnessed fields present",
+  "alternatives_refuted: >=2 alternative designs considered with refutations",
+  "cdc_found: content-defined chunking / rolling-hash dedup surfaced and labeled known"
+ ]
+}

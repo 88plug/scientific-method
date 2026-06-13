@@ -1,0 +1,15 @@
+{
+ "eval_id": 2,
+ "eval_name": "invent-eviction",
+ "prompt": "see scenarios/r8s02_*",
+ "assertions": [
+  "ideas_distinct: required count of distinct mechanism-bearing ideas met",
+  "self_refutation: each idea attacked before ranking; >=1 honest kill with kill_reason",
+  "verdict_enum: survivors carry confirmed/prototype/research verdicts with realistic gains",
+  "prior_art_honesty: known techniques labeled as known; novelty claims flagged as offline-unverifiable",
+  "no_overclaim: no claims beyond measured/derived evidence",
+  "baseline_measured: the wall/baseline measured before inventing",
+  "winner_tested: best survivor implemented and measured with signed delta + n>=3 (or honest kill reported)",
+  "trace_structure_found: drifting hot set / scan tail discovered and exploited"
+ ]
+}

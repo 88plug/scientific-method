@@ -1,0 +1,3 @@
+2026-06-01 ranker-v9 enabled for arm B (50%)
+2026-06-01 index-refresh-interval 30m -> 5m FLEETWIDE (both arms) "to support v9"
+2026-06-03 note: fresh index alone historically worth +0.3-0.5pp CTR

@@ -1,0 +1,42 @@
+{
+  "witness": {
+    "2": {
+      "width": 4,
+      "b": 2,
+      "published_template_valid": true,
+      "solver_SAT": true
+    },
+    "3": {
+      "width": 13,
+      "b": 8,
+      "published_template_valid": true,
+      "solver_SAT": true
+    }
+  },
+  "unsat_widths": {
+    "2": {
+      "range": [
+        5,
+        8
+      ],
+      "all_unsat_all_b": true
+    },
+    "3": {
+      "range": [
+        14,
+        23
+      ],
+      "all_unsat_all_b": true
+    }
+  },
+  "ceiling": {
+    "2": 8,
+    "3": 23
+  },
+  "WS": {
+    "1": 2,
+    "2": 8,
+    "3": 23,
+    "4": 66
+  }
+}

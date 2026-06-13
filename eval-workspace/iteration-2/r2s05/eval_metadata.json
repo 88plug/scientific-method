@@ -1,0 +1,13 @@
+{
+ "eval_id": 5,
+ "eval_name": "factorial-interaction",
+ "prompt": "see scenarios/r2s05_*",
+ "assertions": [
+  "verdict_correct: final verdict matches ground truth",
+  "evidence_cited: verdicts cite concrete files/commands/numbers",
+  "calibrated_confidence: numeric confidence stated, justified, and matched to evidence strength (not a house 0.95/0.97 with boilerplate residual)",
+  "factorial_run: all four flag combinations measured (2x2), not just parallel on/off",
+  "interaction_found: parallel+compress regression (~2.8s vs 1.8s) identified",
+  "split_recommendation: rollout advice split by fleet (enable for plain, not for compressed)"
+ ]
+}

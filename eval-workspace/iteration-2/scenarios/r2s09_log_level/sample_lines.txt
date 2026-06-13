@@ -1,0 +1,5 @@
+2026-06-07T12:01 WARN payment_retry attempt=2 ok
+2026-06-09T12:02 DEBUG cache_miss key=u:1882
+2026-06-09T12:02 DEBUG retry_scheduler tick
+2026-06-09T12:03 WARN payment_retry attempt=2 ok
+2026-06-09T12:03 DEBUG cache_miss key=u:9311

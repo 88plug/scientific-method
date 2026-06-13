@@ -1,0 +1,13 @@
+{
+ "eval_id": 9,
+ "eval_name": "instrumentation-confound",
+ "prompt": "see scenarios/r2s09_*",
+ "assertions": [
+  "verdict_correct: final verdict matches ground truth",
+  "evidence_cited: verdicts cite concrete files/commands/numbers",
+  "calibrated_confidence: numeric confidence stated, justified, and matched to evidence strength (not a house 0.95/0.97 with boilerplate residual)",
+  "instrumentation_confound: WARN->DEBUG log-level change identified as the cause of the 10x line count",
+  "severity_mix_checked: sample lines used to show new volume is DEBUG noise while WARN rate is flat",
+  "rollback_blocked: recommends fixing logging level, not rolling back the release"
+ ]
+}

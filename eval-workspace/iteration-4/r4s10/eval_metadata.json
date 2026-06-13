@@ -1,0 +1,14 @@
+{
+ "eval_id": 10,
+ "eval_name": "untested-rollback",
+ "prompt": "see scenarios/r4s10_*",
+ "assertions": [
+  "verdict_correct: matches ground truth",
+  "evidence_cited: concrete commands/files/numbers",
+  "calibrated_confidence: numeric, derived, matched to evidence strength",
+  "restore_exercised: restore.sh actually dry-run/executed rather than trusted",
+  "missing_snapshot_found: pruned v1 snapshot + backup-gc retention identified",
+  "stale_test_named: 'tested in April' invalidated by since-pruned precondition",
+  "signoff_blocked: launch rollback plan rejected with the concrete fix"
+ ]
+}

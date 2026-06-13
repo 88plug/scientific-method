@@ -1,0 +1,14 @@
+{
+ "eval_id": 4,
+ "eval_name": "invent-outage-safe-retry",
+ "prompt": "see scenarios/r9s04_*",
+ "assertions": [
+  "baseline_measured: the provided baseline run and reported first",
+  "alternatives_refuted: >=3 designs with a refutation pass and >=1 kill or trade named",
+  "acceptance_met: ALL acceptance criteria measured and met by the final design",
+  "numbers_reported: invention's metrics + baseline's with spread/n where applicable",
+  "repro_provided: runnable artifact the grader can re-execute",
+  "prior_art_honesty: known techniques labeled known; novelty claims bounded",
+  "no_overclaim: results stated only at measured strength"
+ ]
+}

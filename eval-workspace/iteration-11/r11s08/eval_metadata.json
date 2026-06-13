@@ -1,0 +1,15 @@
+{
+ "eval_id": 8,
+ "eval_name": "ablation-discipline",
+ "prompt": "see scenarios/r11s08_*",
+ "assertions": [
+  "verdict_correct: matches ground-truth logic",
+  "evidence_executed: claims demonstrated by runs/enumeration, not asserted",
+  "rung_honest: provability rung per claim matches the evidence (no inflation)",
+  "provenance: known art named; search/labeling per invent.md",
+  "claim_chart: element|evidence|rung table where a claim is made",
+  "tuning_decision: ordering-as-tuning-vs-invention decided and justified",
+  "ablation_table: each element removed and re-measured; carrying element named",
+  "correctness_oracle: checksum equality verified"
+ ]
+}

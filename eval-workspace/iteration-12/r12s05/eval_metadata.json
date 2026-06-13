@@ -1,0 +1,14 @@
+{
+ "eval_id": 5,
+ "eval_name": "meta-grader-reliability",
+ "prompt": "see scenarios/r12s05_*",
+ "assertions": [
+  "metric_defined: kappa/agreement properly defined",
+  "model_assumptions: simulated-judge parameters stated; conclusions tagged model-derived",
+  "protocol_gain: consistency improvement demonstrated at <=3x cost",
+  "real_study_boundary: what only real replication confirms, stated",
+  "provenance_live: inter-rater reliability art cited",
+  "claim_chart: rungs distinguish modeled from measured",
+  "decorrelation_caveat: shared-model judge correlation acknowledged"
+ ]
+}

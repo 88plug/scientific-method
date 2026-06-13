@@ -1,0 +1,14 @@
+{
+ "eval_id": 7,
+ "eval_name": "invent-heisenprobe",
+ "prompt": "see scenarios/r8s07_*",
+ "assertions": [
+  "ideas_distinct: required count of distinct mechanism-bearing ideas met",
+  "self_refutation: each idea attacked before ranking; >=1 honest kill with kill_reason",
+  "verdict_enum: survivors carry confirmed/prototype/research verdicts with realistic gains",
+  "prior_art_honesty: known techniques labeled as known; novelty claims flagged as offline-unverifiable",
+  "no_overclaim: no claims beyond measured/derived evidence",
+  "perturbation_accounting: each probe states precisely what it perturbs and what it can/cannot conclude",
+  "observer_effect_applied: the masking trap from the brief explicitly designed around"
+ ]
+}

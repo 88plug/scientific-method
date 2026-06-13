@@ -1,0 +1,14 @@
+{
+ "eval_id": 7,
+ "eval_name": "env-dependent-repro",
+ "prompt": "see scenarios/r4s07_*",
+ "assertions": [
+  "verdict_correct: matches ground truth",
+  "evidence_cited: concrete commands/files/numbers",
+  "calibrated_confidence: numeric, derived, matched to evidence strength",
+  "env_hypothesis: timezone/DST formed from the US-only clue",
+  "crash_reproduced: TZ=US zone run actually crashes; TZ=UTC/EU passes",
+  "closure_rejected: ticket reopened with root cause",
+  "fix_named: UTC/timezone-aware parsing fix proposed"
+ ]
+}

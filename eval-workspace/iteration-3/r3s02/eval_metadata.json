@@ -1,0 +1,13 @@
+{
+ "eval_id": 2,
+ "eval_name": "stale-extrapolation",
+ "prompt": "see scenarios/r3s02_*",
+ "assertions": [
+  "verdict_correct: matches ground truth",
+  "evidence_cited: concrete numbers/files/commands behind every verdict",
+  "calibrated_confidence: numeric, justified, matched to evidence strength (no house number)",
+  "measured_not_extrapolated: dedup actually run at increasing n up to 1M",
+  "stale_premise_found: March note tied to v1; current code is O(n log n)",
+  "go_decision: GO with measured margin vs the 30-min window"
+ ]
+}

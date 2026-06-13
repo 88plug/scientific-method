@@ -1,0 +1,17 @@
+{
+ "eval_id": 1,
+ "eval_name": "ttl-lds-composition",
+ "prompt": "see scenarios/r13s01_*",
+ "assertions": [
+  "acceptance_met: all criteria measured/met (or honestly re-graded with reproducible proof) under re-run",
+  "quota_refute: ideation quota + refutation with honest kills",
+  "fair_gates: tuned baseline + holdout + ablation executed",
+  "provability_upgrade: claims upgraded beyond 'measured' where the type allows, rung stated",
+  "provenance_live: real search log, anticipation/combination tests, known art labeled",
+  "claim_chart: single named element|evidence|rung table",
+  "rung_honest: witness-artifact rule; no inflation",
+  "disclosure_and_rubric: disclosure block + \u00a78 self-rank with verification gate",
+  "delta_scoped: LDS-vs-hash-jitter gap measured and reported honestly (not just LDS-vs-naive-random)",
+  "refetch_gate: mean refetches within 2% (no TTL inflation)"
+ ]
+}

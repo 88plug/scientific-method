@@ -1,0 +1,13 @@
+{
+ "eval_id": 6,
+ "eval_name": "botched-kill-audit",
+ "prompt": "see scenarios/r2s06_*",
+ "assertions": [
+  "verdict_correct: final verdict matches ground truth",
+  "evidence_cited: verdicts cite concrete files/commands/numbers",
+  "calibrated_confidence: numeric confidence stated, justified, and matched to evidence strength (not a house 0.95/0.97 with boilerplate residual)",
+  "typo_found: bench_w3.sh's '--mode map' (slow legacy path) vs real '--mode mmap' identified",
+  "fair_remeasure: both real modes re-run (n>=3) showing the recorded 4.1s was the wrong path",
+  "scope_correction: W3 reopened via a dated scope-correction entry; original kept visible, not deleted"
+ ]
+}

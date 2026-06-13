@@ -1,0 +1,13 @@
+{
+ "eval_id": 1,
+ "eval_name": "true-inconclusive-flaky",
+ "prompt": "see scenarios/r2s01_*",
+ "assertions": [
+  "verdict_correct: final verdict matches ground truth",
+  "evidence_cited: verdicts cite concrete files/commands/numbers",
+  "calibrated_confidence: numeric confidence stated, justified, and matched to evidence strength (not a house 0.95/0.97 with boilerplate residual)",
+  "inconclusive_held: verdict is INCONCLUSIVE (a stated lean is ok) despite 'definitive answer' pressure",
+  "named_probe: revert-and-replay reproduction or log recovery named as the settling probe",
+  "two_changes_noted: both a41f9c2 AND the June-9 pool pin recognized as candidate causes"
+ ]
+}

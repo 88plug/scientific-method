@@ -1,0 +1,7 @@
+case_id,locale,discount_type,items,expected_total,actual_total
+1,de_DE,percentage,3,19.99,19.98
+2,de_DE,percentage,7,104.95,104.93
+3,fr_FR,percentage,2,9.99,9.98
+4,de_DE,percentage,11,259.89,259.85
+5,en_US,percentage,3,19.99,19.99
+6,de_DE,fixed,3,25.00,25.00

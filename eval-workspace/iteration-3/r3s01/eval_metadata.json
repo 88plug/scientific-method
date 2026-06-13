@@ -1,0 +1,13 @@
+{
+ "eval_id": 1,
+ "eval_name": "noise-vs-effect",
+ "prompt": "see scenarios/r3s01_*",
+ "assertions": [
+  "verdict_correct: matches ground truth",
+  "evidence_cited: concrete numbers/files/commands behind every verdict",
+  "calibrated_confidence: numeric, justified, matched to evidence strength (no house number)",
+  "replication_done: each impl run n>=10 with median+spread reported",
+  "noise_named: single-run methodology rejected; difference shown within variance",
+  "no_false_confirm: does not endorse the 10% claim"
+ ]
+}

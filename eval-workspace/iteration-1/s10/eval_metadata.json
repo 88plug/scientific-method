@@ -1,0 +1,13 @@
+{
+ "eval_id": 10,
+ "eval_name": "scoped-claim",
+ "prompt": "see scenarios/s10_*",
+ "assertions": [
+  "verdict_correct: final verdict matches the planted ground truth",
+  "evidence_cited: every verdict backed by a concrete command/file/number reference",
+  "calibrated_confidence: a numeric confidence is stated and justified; not 1.0 while unknowns remain",
+  "scope_limited_verdict: confirms on the text corpus but refuses blanket sign-off",
+  "named_unknown: unsynced NAS binaries (PNG/recordings/zips) named as the untested population with next probe",
+  "measured_corpus: gzip ratios actually measured on the corpus files"
+ ]
+}

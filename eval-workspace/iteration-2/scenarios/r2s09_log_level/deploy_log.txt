@@ -1,0 +1,2 @@
+2026-06-08T06:00 release 6.8.0 deployed
+  - changelog: payments retry tuning; logging.yaml: root level WARN -> DEBUG ("temporary, for the retry investigation")

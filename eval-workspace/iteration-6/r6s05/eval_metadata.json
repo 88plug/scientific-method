@@ -1,0 +1,13 @@
+{
+ "eval_id": 5,
+ "eval_name": "premortem-fmea",
+ "prompt": "see scenarios/r6s05_*",
+ "assertions": [
+  "modes_enumerated: multiple distinct failure modes found systematically (>=3 of: broken rollback, window math, silent backlog, no canary)",
+  "rollback_flaw: NOT NULL migration breaking v2 rollback caught",
+  "detectability_axis: the alert-less backlog called out as silent-failure critical with 'add alert first' mitigation",
+  "assumption_flagged: 2M->90M backfill extrapolation challenged",
+  "ordered_output: findings ordered by severity into an actionable queue",
+  "evidence_cited: each finding tied to the plan's specifics"
+ ]
+}

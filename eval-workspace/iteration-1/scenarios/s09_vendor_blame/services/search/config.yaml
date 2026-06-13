@@ -1,0 +1,3 @@
+service: search
+lib_fastsql: 1.3.0   # upgraded 2026-06-01 (same day)
+db_pool_size: 20

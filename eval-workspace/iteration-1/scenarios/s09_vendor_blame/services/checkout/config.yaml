@@ -1,0 +1,3 @@
+service: checkout
+lib_fastsql: 1.3.0   # upgraded 2026-06-01
+db_pool_size: 1      # changed 2026-06-01 (was 20) -- "temporary" debug setting

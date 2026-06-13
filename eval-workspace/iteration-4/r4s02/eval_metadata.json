@@ -1,0 +1,13 @@
+{
+ "eval_id": 2,
+ "eval_name": "denominator-neglect",
+ "prompt": "see scenarios/r4s02_*",
+ "assertions": [
+  "verdict_correct: matches ground truth",
+  "evidence_cited: concrete commands/files/numbers",
+  "calibrated_confidence: numeric, derived, matched to evidence strength",
+  "rates_computed: per-deploy failure rate per weekday (all ~5%)",
+  "denominator_named: exposure vs risk distinction explicit",
+  "freeze_rejected: the 3x-riskier rationale rejected"
+ ]
+}

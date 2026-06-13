@@ -1,0 +1,15 @@
+{
+ "eval_id": 6,
+ "eval_name": "oracle-gap-nuance",
+ "prompt": "see scenarios/r11s06_*",
+ "assertions": [
+  "verdict_correct: matches ground-truth logic",
+  "evidence_executed: claims demonstrated by runs/enumeration, not asserted",
+  "rung_honest: provability rung per claim matches the evidence (no inflation)",
+  "provenance: known art named; search/labeling per invent.md",
+  "claim_chart: element|evidence|rung table where a claim is made",
+  "opt_computed: Belady OPT measured multi-seed",
+  "online_attempts: >=3 real policies measured",
+  "grade_precision: 99%-of-OPT verdict graded strong-evidence vs proven correctly (no misapplied competitive-ratio theorem)"
+ ]
+}

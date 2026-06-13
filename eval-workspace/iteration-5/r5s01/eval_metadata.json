@@ -1,0 +1,14 @@
+{
+ "eval_id": 1,
+ "eval_name": "compound-ceiling-span",
+ "prompt": "see scenarios/r5s01_*",
+ "assertions": [
+  "verdict_correct: matches ground truth",
+  "evidence_cited: concrete numbers/files/commands",
+  "calibrated_confidence: numeric, derived, not a house number",
+  "span_split: load vs hash spans measured separately",
+  "wall_falsified: hash-only throughput shown far above 350MB/s, n>=3 + spread",
+  "purchase_blocked: accelerator purchase rejected on this evidence",
+  "alt_algo_checked: blake2b (or equivalent) measured as further headroom"
+ ]
+}

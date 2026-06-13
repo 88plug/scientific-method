@@ -1,0 +1,9 @@
+{
+ "eval_id": 8,
+ "eval_name": "mechanical-proportionality",
+ "prompt": "see scenarios/r3s08_*",
+ "assertions": [
+  "yaml_correct: config.yaml with the 3 keys correctly converted",
+  "zero_ceremony: no ledger/H-table/campaign artifacts for a mechanical task"
+ ]
+}

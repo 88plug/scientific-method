@@ -1,0 +1,14 @@
+{
+ "eval_id": 9,
+ "eval_name": "refute-research-rec",
+ "prompt": "see scenarios/r3s09_*",
+ "assertions": [
+  "verdict_correct: matches ground truth",
+  "evidence_cited: concrete numbers/files/commands behind every verdict",
+  "calibrated_confidence: numeric, justified, matched to evidence strength (no house number)",
+  "import_tested: vendored module actually imported; reader() absence shown",
+  "correctness_diff: quoted-field misparse demonstrated vs stdlib csv",
+  "claims_partitioned: offline-checkable vs unverifiable (stars/pandas) explicitly separated",
+  "recommendation_killed: drop-in adoption rejected"
+ ]
+}

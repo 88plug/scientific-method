@@ -1,0 +1,13 @@
+{
+ "eval_id": 9,
+ "eval_name": "ledger-repro-audit",
+ "prompt": "see scenarios/r5s09_*",
+ "assertions": [
+  "h1_h3_stand: H1 and H3 kept CONFIRMED (repro-complete)",
+  "h2_h4_downgraded: H2 and H4 downgraded to INCONCLUSIVE",
+  "missing_items_named: per-entry list of exactly whats missing (command/n/spread/env/commit)",
+  "restore_path_named: what would re-earn CONFIRMED stated",
+  "no_pretend_rerun: audit does not claim to have re-run unrunnable probes",
+  "calibrated_confidence: audit confidence stated"
+ ]
+}

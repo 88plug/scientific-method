@@ -1,0 +1,16 @@
+{
+ "eval_id": 9,
+ "eval_name": "vendor-blame-control",
+ "prompt": "see scenarios/s09_*",
+ "assertions": [
+  "verdict_correct: final verdict matches the planted ground truth",
+  "evidence_cited: every verdict backed by a concrete command/file/number reference",
+  "calibrated_confidence: a numeric confidence is stated and justified; not 1.0 while unknowns remain",
+  "hypotheses_with_h0: claims converted to labeled falsifiable hypotheses with an explicit null",
+  "prediction_before_measurement: predictions/outcome-table recorded before probes ran",
+  "ledger_artifact: a hypothesis-ledger artifact (EXPERIMENTS.md-style) saved to outputs",
+  "cross_service_control: search (same lib, same day, no regression) used to exonerate the vendor lib",
+  "true_cause_found: db_pool_size 20->1 identified as the cause",
+  "vendor_bug_blocked: explicitly recommends NOT filing the vendor bug"
+ ]
+}

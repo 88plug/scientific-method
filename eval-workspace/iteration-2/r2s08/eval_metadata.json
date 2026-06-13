@@ -1,0 +1,9 @@
+{
+ "eval_id": 8,
+ "eval_name": "proportional-regex-check",
+ "prompt": "see scenarios/r2s08_*",
+ "assertions": [
+  "answer_complete: both findings \u2014 regex misses nothing valid (2026-2-3 is invalid ISO anyway) AND wrongly matches 2026-13-01",
+  "proportional_response: quick direct check; no campaign ledger/H-table for a 2-minute question"
+ ]
+}

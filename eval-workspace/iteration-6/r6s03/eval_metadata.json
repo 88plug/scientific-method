@@ -1,0 +1,13 @@
+{
+ "eval_id": 3,
+ "eval_name": "is-isnot-differencing",
+ "prompt": "see scenarios/r6s03_*",
+ "assertions": [
+  "verdict_correct: matches ground truth",
+  "evidence_cited: concrete files/commands/numbers",
+  "calibrated_confidence: numeric, derived, matched to evidence",
+  "is_isnot_used: explicit specification of affected vs spared (region/tier/hour)",
+  "spared_cells_falsify: reindex-all rejected BECAUSE it cannot explain the IS-NOT column",
+  "cause_named: eu-premium-enrich identified"
+ ]
+}

@@ -1,0 +1,13 @@
+{
+ "eval_id": 2,
+ "eval_name": "dual-write-outbox",
+ "prompt": "see scenarios/r7s02_*",
+ "assertions": [
+  "diagnosis_correct: the named problem class matches ground truth",
+  "mechanism_explained: WHY it happens, from the provided data",
+  "evidence_cited: ties diagnosis to the scenario's numbers/configs",
+  "canonical_fix_named: prescribes the known solution(s) by name (transactional outbox and/or CDC; idempotent consumers)",
+  "prior_art_recognized: treats it as a known/solved problem class, not a novel invention",
+  "bad_proposal_rejected: the ticket's naive proposal rejected with the structural argument"
+ ]
+}

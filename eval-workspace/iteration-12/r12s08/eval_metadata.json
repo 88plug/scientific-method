@@ -1,0 +1,15 @@
+{
+ "eval_id": 8,
+ "eval_name": "bounded-streaming-join",
+ "prompt": "see scenarios/r12s08_*",
+ "assertions": [
+  "acceptance_met: criteria measured and met (or honestly re-graded with proof) under re-run",
+  "quota_met: ideation quota with distinct mechanisms across required lenses",
+  "refutations: fresh refutation per idea; honest kills logged",
+  "provenance_live: real search log, closest-found grammar, known art labeled",
+  "claim_chart: element|evidence|rung complete",
+  "rung_honest: witness-artifact rule respected; no inflation",
+  "disclosure: block complete",
+  "rubric_ranking: \u00a78 dimensions scored with verification as gate"
+ ]
+}

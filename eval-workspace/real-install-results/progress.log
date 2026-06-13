@@ -1,0 +1,11 @@
+=== [s01_rootcause] running real claude -p ===
+=== [s01_rootcause] done: fired=True result=success ===
+=== [s02_restraint] running real claude -p ===
+=== [s02_restraint] done: fired=False result=success ===
+=== [s03_feedback] running real claude -p ===
+=== [s03_feedback] done: fired=False result=success ===
+=== [s04_invention] running real claude -p ===
+=== [s04_invention] done: fired=True result=None ===
+=== [s05_impossible] running real claude -p ===
+=== [s05_impossible] done: fired=True result=success ===
+REAL_INSTALL_EVAL_COMPLETE

@@ -1,0 +1,14 @@
+{
+ "eval_id": 10,
+ "eval_name": "clock-step-ids",
+ "prompt": "see scenarios/r7s10_*",
+ "assertions": [
+  "diagnosis_correct: the named problem class matches ground truth",
+  "mechanism_explained: WHY it happens, from the provided data",
+  "evidence_cited: ties diagnosis to the scenario's numbers/configs",
+  "canonical_fix_named: prescribes the known solution(s) by name (monotonic clock-regression guard (snowflake-style); NTP slew vs step; UUIDv7/ULID with guards)",
+  "prior_art_recognized: treats it as a known/solved problem class, not a novel invention",
+  "bad_proposal_rejected: the ticket's naive proposal rejected with the structural argument",
+  "guarantee_not_reduce: fix eliminates duplicates rather than making them rarer"
+ ]
+}

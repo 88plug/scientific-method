@@ -1,0 +1,15 @@
+{
+ "eval_id": 3,
+ "eval_name": "invent-dedup-novelty-trap",
+ "prompt": "see scenarios/r8s03_*",
+ "assertions": [
+  "ideas_distinct: required count of distinct mechanism-bearing ideas met",
+  "self_refutation: each idea attacked before ranking; >=1 honest kill with kill_reason",
+  "verdict_enum: survivors carry confirmed/prototype/research verdicts with realistic gains",
+  "prior_art_honesty: known techniques labeled as known; novelty claims flagged as offline-unverifiable",
+  "no_overclaim: no claims beyond measured/derived evidence",
+  "implemented_measured: chosen design measured for memory + FP/FN against truth labels",
+  "bloom_not_claimed_novel: Bloom/cuckoo identified as known prior art",
+  "semantics_handled: FP-vs-FN direction of the filter reasoned correctly"
+ ]
+}
