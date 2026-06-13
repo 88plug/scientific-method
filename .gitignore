@@ -10,3 +10,6 @@ __pycache__/
 eval-workspace/grand-challenge/venv/
 eval-workspace/grand-challenge/*.log
 eval-workspace/grand-challenge/found_*.json
+
+# 4.3MB regenerable telemetry fixture — rebuild via its gen_app_log.py
+eval-workspace/iteration-8/scenarios/r8s05_logcomp/app.log
