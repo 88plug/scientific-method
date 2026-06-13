@@ -6,8 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/surface-ledger.sh",
-            "args": []
+            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/surface-ledger.sh"
           }
         ]
       }
