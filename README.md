@@ -2,6 +2,8 @@
 
 # Scientific Method
 
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/88plug/scientific-method)
+
 A Claude Code plugin that runs investigations, debugging, performance work, and claim validation as falsification-first campaigns — for engineers who need to be right, not just confident.
 
 [![plugin-validate](https://github.com/88plug/scientific-method/actions/workflows/plugin-validate.yml/badge.svg)](https://github.com/88plug/scientific-method/actions/workflows/plugin-validate.yml)
