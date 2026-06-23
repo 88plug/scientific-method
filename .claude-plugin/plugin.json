@@ -2,6 +2,7 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "scientific-method",
   "displayName": "Scientific Method",
+  "version": "2026.6.23",
   "description": "Falsification-first investigation workflow: convert every assertion into a labeled falsifiable hypothesis, predict before measuring, run controlled experiments, verify findings adversarially (REFUTE-first), and persist verdicts in a hypothesis ledger so killed ideas are never re-attacked",
   "author": {
     "name": "88plug",
@@ -12,16 +13,25 @@
   "license": "FSL-1.1-ALv2",
   "keywords": [
     "claude-code",
+    "claude",
+    "anthropic",
+    "ai",
+    "llm",
+    "ai-agents",
+    "developer-tools",
+    "productivity",
+    "automation",
+    "cli",
+    "claude-code-plugin",
+    "claude-skills",
     "scientific-method",
     "investigation",
     "debugging",
     "hypothesis",
     "falsification",
     "experiment",
-    "verification",
-    "benchmarking",
     "root-cause",
-    "invention",
-    "workflow"
-  ]
+    "benchmarking"
+  ],
+  "hooks": "./hooks/hooks.json"
 }

@@ -1,9 +1,18 @@
 # Changelog
 
-All notable changes to the scientific-method plugin. Versions follow the
-`plugin.json` `version` field; users receive an update when it is bumped.
+All notable changes to the scientific-method plugin. Versions follow calver
+(`YEAR.MONTH.BUILD`) and match the `plugin.json` `version` field; users receive
+an update when it is bumped.
 
-## [1.7.2] — 2026-06-12
+## 2026.6.23
+
+### Changed
+- Compliance pass to the 88plug scaffold: added `version` (calver) and an explicit
+  `hooks` pointer to `plugin.json`, set keywords to exactly 20, refreshed CI action
+  versions, added a smoke test, fixed the MkDocs config and docs landing page, and
+  extended `.gitignore` data-hygiene patterns.
+
+## 2026.6.12
 
 ### Changed
 - **License: MIT → FSL-1.1-ALv2** (`LICENSE.md`, `Copyright 2026 88plug`) to match
@@ -15,8 +24,6 @@ All notable changes to the scientific-method plugin. Versions follow the
   `tags: ["type:plugin", …]`, and `repository` `.git` suffix. Added
   `marketplace-entry.json` (github-source entry for the central marketplace).
 
-## [1.7.1] — 2026-06-12
-
 ### Fixed (found by real interactive tmux evals, re-verified)
 - **Auto-triggering on incident framing**: broadened the SKILL.md description to
   cover outage/brownout/latency-spike/retry-storm/cascading-failure/regression
@@ -24,8 +31,6 @@ All notable changes to the scientific-method plugin. Versions follow the
   implicit-incident prompts that previously slipped through.
 - **Numeric confidence mandatory**: every verdict (including weak-support /
   inconclusive) must emit an actual confidence number, not a verbal hedge.
-
-## [1.7.0] — 2026-06-12
 
 ### Added
 - **SessionStart hook** (`hooks/surface-ledger.sh`): when an `EXPERIMENTS.md`
@@ -37,47 +42,30 @@ All notable changes to the scientific-method plugin. Versions follow the
   `repository`, and full `author`/`owner` fields in `plugin.json` and
   `marketplace.json`.
 
-### Changed
+### Changed (workflow)
 - All commands now set `disable-model-invocation: true` (user-triggered only —
   Claude won't auto-fire a heavyweight council/falsification/invention campaign
   mid-conversation) and carry scoped `allowed-tools`.
 - Agents gain scoped `tools`/`disallowedTools` (e.g. `experiment-designer` and
   `refuter` are now read-only, enforcing "design, don't run" and "read-only
   probes") and display `color`s. `refuter` is marked for proactive use.
-
-## [1.6.3] — 2026-06-12
 - Eval iteration-14 fixes: the invention pipeline now names the canonical
   known-good as prior art and scopes novelty to the measured delta; calibration
   guidance distinguishes a weak directional lean from a flat INCONCLUSIVE.
-
-## [1.6.2] — 2026-06-12
 - WS-template campaign: a gated, validated SAT apparatus and a worked
   certificate-verifiable result, folded into `references/open-records.md`.
-
-## [1.6.1] — 2026-06-12
 - `references/open-records.md`: certificate-verifiable discovery playbook with a
   worked case study.
-
-## [1.6.0] — 2026-06-12
 - Open-records attack capability: methodology for world-record attempts on
   certificate-verifiable open problems.
-
-## [1.5.0] — 2026-06-12
 - Certification close: peak invention discipline; peer-review correction loops.
-
-## [1.4.0] — 2026-06-12
 - Provability hierarchy, impossibility toolkit, campaign capstone.
-
-## [1.3.0] — 2026-06-12
 - Invention established as the default continuation, with provable claims.
-
-## [1.2.0] — 2026-06-12
 - Acceptance-gated invention campaigns.
-
-## [1.1.0] — 2026-06-12
 - Anticipation (abduction) and causal-structure layers added.
 
-## [1.0.0] — 2026-06-11
+## 2026.6.11
+
 - Initial release: falsification-first investigation workflow — hypotheses,
   prediction-before-measurement, controlled experiments, REFUTE-first
   verification, and the persistent hypothesis ledger.
