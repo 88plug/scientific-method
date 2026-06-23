@@ -2,7 +2,6 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "scientific-method",
   "displayName": "Scientific Method",
-  "version": "2026.6.23",
   "description": "Falsification-first investigation workflow: convert every assertion into a labeled falsifiable hypothesis, predict before measuring, run controlled experiments, verify findings adversarially (REFUTE-first), and persist verdicts in a hypothesis ledger so killed ideas are never re-attacked",
   "author": {
     "name": "88plug",
