@@ -1,0 +1,27 @@
+{
+  "pythonVersion": "3.12",
+  "typeCheckingMode": "basic",
+  "include": [
+    "skills",
+    "agents",
+    "hooks",
+    ".ci",
+    "tests"
+  ],
+  "exclude": [
+    "**/node_modules",
+    "**/__pycache__",
+    "**/.venv",
+    "**/venv",
+    "**/site",
+    "**/build",
+    "**/dist",
+    "**/eval-workspace",
+    "**/research",
+    "**/vendor",
+    "**/.git",
+    "**/.ruff_cache"
+  ],
+  "reportMissingImports": true,
+  "reportMissingTypeStubs": false
+}
