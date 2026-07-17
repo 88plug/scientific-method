@@ -28,3 +28,6 @@ EVAL_REPORT.md
 # campaign sweep scripts + per-run metadata stay local
 eval-workspace/**/sweep*.py
 eval-workspace/**/eval_metadata.json
+
+# mkdocs build output
+site/

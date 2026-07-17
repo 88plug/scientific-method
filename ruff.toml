@@ -1,0 +1,10 @@
+# eval-workspace holds campaign fixtures / scenario sandboxes — not production code.
+extend-exclude = [
+    "eval-workspace",
+    "site",
+    ".venv",
+    "venv",
+    "vendor",
+    "build",
+    "dist",
+]
