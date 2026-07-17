@@ -1,21 +1,23 @@
 site_name: Scientific Method
-site_description: A Claude Code plugin that runs investigations, debugging, performance work, and claim validation as falsification-first campaigns.
+site_description: >-
+  A Claude Code plugin that runs investigations, debugging, performance work,
+  and claim validation as falsification-first campaigns.
 site_url: https://88plug.github.io/scientific-method/
 repo_url: https://github.com/88plug/scientific-method
 repo_name: 88plug/scientific-method
 edit_uri: edit/main/docs/
 use_directory_urls: true
+strict: true
 
 theme:
   name: material
   features:
-    - navigation.sections   # group nav by section, uses width well
-    - navigation.top        # back-to-top button
-    - navigation.instant    # SPA-style fast page loads
-    - content.code.copy     # copy button on code blocks (needs superfences below)
+    - navigation.sections
+    - navigation.top
+    - navigation.instant
+    - content.code.copy
     - search.suggest
   palette:
-    # Light/dark toggle that follows the OS preference by default.
     - media: "(prefers-color-scheme: light)"
       scheme: default
       toggle:
@@ -27,6 +29,12 @@ theme:
         icon: material/weather-sunny
         name: Switch to light mode
 
+nav:
+  - Home: index.md
+  - Workflow: workflow.md
+  - Agents: agents.md
+  - Commands: commands.md
+
 markdown_extensions:
   - admonition
   - attr_list
@@ -34,8 +42,8 @@ markdown_extensions:
   - def_list
   - footnotes
   - tables
-  - pymdownx.highlight     # code highlighting (ships with mkdocs-material)
-  - pymdownx.superfences   # required for content.code.copy + nested fences
-  - pymdownx.details       # collapsible <details> admonitions
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.details
   - toc:
       permalink: true

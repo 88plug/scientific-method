@@ -13,6 +13,8 @@ A Claude Code plugin that runs investigations, debugging, performance work, and 
 /plugin install scientific-method@scientific-method
 ```
 
+No setup, no API keys, no MCP server. The plugin enforces method over your existing tools.
+
 ## Quickstart
 
 Run a full campaign on any problem in one command:
@@ -21,96 +23,85 @@ Run a full campaign on any problem in one command:
 /scientific-method:investigate the API returns 500 under load but not in tests
 ```
 
-You get back labeled hypotheses (H1..Hn), a prediction for each written before
-any measurement, the cheapest probe run first, and a calibrated verdict — with
-every result logged to a persistent ledger so killed ideas stay killed.
-
-No setup, no API keys, no MCP server. The plugin enforces method over your
-existing tools.
+You get labeled hypotheses (H1..Hn), a prediction for each written before any measurement, the cheapest probe run first, and a calibrated verdict — every result logged to a persistent ledger so killed ideas stay killed.
 
 ## What it does
 
-Most debugging is guessing dressed up as analysis. This plugin makes Claude
-work like a scientist: turn each assertion into a falsifiable hypothesis,
-predict the outcome before measuring, run a controlled experiment, attack the
-result before trusting it, and record the verdict so it survives across
-sessions.
+Most debugging is guessing dressed up as analysis. This plugin makes Claude work like a scientist:
 
-It is distilled from real session transcripts where the method cracked
-problems ordinary debugging did not — a GPU codec campaign that falsified four
-asserted "physical" performance walls, a fleet forensics investigation that
-killed two plausible-but-wrong root causes with control cases before filing a
-vendor bug, and benchmark work where honest baselines caught regressions that
-averages hid.
+1. Turn each assertion into a falsifiable hypothesis.
+2. Predict the outcome before measuring.
+3. Run a controlled experiment.
+4. Attack the result before trusting it.
+5. Record the verdict so it survives across sessions.
+
+It is distilled from real session transcripts: a GPU codec campaign that falsified four asserted "physical" performance walls, a fleet forensics investigation that killed two plausible-but-wrong root causes with control cases before filing a vendor bug, and benchmark work where honest baselines caught regressions that averages hid.
 
 !!! note
-    This is a methodology plugin. It ships a skill, commands, agents, and one
-    read-only hook — no MCP server, output style, or statusline. The hook is the
-    only thing that runs automatically, and it only reads `EXPERIMENTS.md`.
+    This is a methodology plugin. It ships a skill, commands, agents, and one read-only hook — no MCP server, output style, or statusline. The hook is the only thing that runs automatically, and it only reads `EXPERIMENTS.md`.
 
 ## What it enforces
 
-- Every asserted limit, cause, or claim becomes a labeled falsifiable
-  hypothesis (H1..Hn) with an explicit null.
-- Predictions and outcome-to-conclusion tables are written before measuring.
-- Cheapest falsification first — one probe beats five agents arguing.
-- Controls and baselines are mandatory for causal and performance claims.
-- Findings pass a REFUTE-first adversarial gate before being trusted.
-- Confidence is calibrated — 0.90+ needs ground-truth proof, and being
-  confidently wrong is worse than being inconclusive.
-- Verdicts persist in a hypothesis ledger (`EXPERIMENTS.md`) with a
-  falsification log marked DO-NOT-RE-ATTACK, so killed ideas stay killed across
-  sessions and compactions.
+| Rule | Why it matters |
+|---|---|
+| Labeled hypotheses (H1..Hn) with explicit nulls | Assertions stop being free-floating claims |
+| Predictions before measurement | Blocks post-hoc rationalization |
+| Cheapest falsification first | One probe beats five agents arguing |
+| Controls and baselines mandatory | Correlation is not a finding |
+| REFUTE-first adversarial gate | Author of a finding cannot referee it |
+| Calibrated confidence (0.90+ needs ground truth) | Confidently-wrong is worse than inconclusive |
+| Persistent ledger (`EXPERIMENTS.md`) | Killed ideas stay killed across sessions |
 
-## The workflow
+## Workflow at a glance
 
-Each stage maps to a command you can run on its own, or that `investigate`
-chains for you.
+Each stage maps to a command you can run alone, or that `investigate` chains for you. Full detail: [Workflow](workflow.md).
 
-- Hypothesis — turn each assertion into a labeled, falsifiable claim with a null.
-- Prediction — write what each outcome would mean, before measuring.
-- Experiment — run the cheapest controlled probe that can falsify the claim.
-- Refute — attack surviving findings adversarially before trusting them.
-- Verdict — issue a calibrated result: confirmed, prototype, research, or kill.
-- Ledger — persist verdicts so killed ideas are never re-attacked.
+| Stage | What happens |
+|---|---|
+| Hypothesis | Assertion → labeled falsifiable claim + null |
+| Prediction | Outcome→conclusion table, written before measuring |
+| Experiment | Cheapest controlled probe that can falsify the claim |
+| Refute | Adversarial attack on surviving findings |
+| Verdict | `confirmed` / `prototype` / `research` / `kill` |
+| Ledger | Persist so DO-NOT-RE-ATTACK entries never restart |
 
 ## Commands
 
 | Command | What it does |
 |---|---|
-| `/scientific-method:investigate <problem>` | Full campaign: hypotheses, controlled experiments, verdicts, ledger |
-| `/scientific-method:falsify <claim>` | Attack an asserted limit, ceiling, or claim with designed probes |
-| `/scientific-method:invent <problem>` | Invention campaign: ideate past a limit, refute, build, measure vs tuned baseline, provenance-search, certify |
-| `/scientific-method:verdict [claims]` | Adversarial REFUTE-first review of findings before they are trusted |
-| `/scientific-method:ledger [sync]` | Create or update the persistent hypothesis ledger |
-| `/scientific-method:council <question>` | Model council: same question to independent seats on different models, dissent surfaced, factual cruxes routed to probes |
-| `/scientific-method:peer-review <work>` | Blind lensed reviewers who execute, rebuttal answered with evidence, area-chair decision |
+| `/scientific-method:investigate <problem>` | Full campaign: hypotheses, probes, verdicts, ledger |
+| `/scientific-method:falsify <claim>` | Attack an asserted limit, ceiling, or claim |
+| `/scientific-method:invent <problem>` | Invention campaign past a confirmed limit |
+| `/scientific-method:verdict [claims]` | REFUTE-first review before you act on a finding |
+| `/scientific-method:ledger [sync]` | Create or update the hypothesis ledger |
+| `/scientific-method:council <question>` | Multi-model council; dissent + factual cruxes → probes |
+| `/scientific-method:peer-review <work>` | Blind lensed review + rebuttal + area-chair decision |
+
+Full reference: [Commands](commands.md).
 
 ## Agents
 
-These run under the hood when a campaign fans out. You can also invoke them
-directly.
+These fan out under campaigns. You can also invoke them directly. Full detail: [Agents](agents.md).
 
-- `experiment-designer` — designs one hypothesis, probe, and outcome table (design and execute are split).
-- `refuter` — tries to refute a finding, returns confirmed, prototype, research, or kill.
-- `council-member` — one independent council seat: position, evidence, and "what would change my mind".
-- `peer-reviewer` — one blind, execution-grounded review with scores and a recommendation.
-- `meta-reviewer` — the area chair: weighs evidence over votes and issues the final decision.
+| Agent | Role | Typical parent |
+|---|---|---|
+| `experiment-designer` | Design one hypothesis, probe, and outcome table (does not run it) | `investigate`, `falsify` |
+| `refuter` | Try to kill a finding; return confirmed / prototype / research / kill | `verdict`, invent pipeline |
+| `council-member` | One independent council seat: position, evidence, would-change-my-mind | `council` |
+| `peer-reviewer` | One blind, execution-grounded review with a lens and scores | `peer-review` |
+| `meta-reviewer` | Area chair: evidence over votes; final accept/revise/reject | `peer-review` |
 
 <details>
 <summary>Skill and hook</summary>
 
-- `scientific-method` skill — the method itself, artifact templates, and multi-agent campaign patterns.
-- SessionStart hook — if `EXPERIMENTS.md` exists, surfaces the ledger at session start so killed hypotheses stay killed. Read-only; a silent no-op when the file is absent.
+- **`scientific-method` skill** — the method itself, artifact templates, and multi-agent campaign patterns. Auto-triggers on phrases like "prove it", "root cause this", "no guessing", or any challenge to an asserted number, limit, or cause.
+- **SessionStart hook** — if `EXPERIMENTS.md` exists, surfaces the ledger so killed hypotheses stay killed. Read-only; silent no-op when the file is absent.
 
 </details>
 
 ## How to trigger
 
-Run any command above, or let the skill auto-trigger. It activates on phrases
-like "use the scientific method", "prove it", "validate these claims", "root
-cause this 100%", "no guessing", or any challenge to an asserted number, limit,
-or cause.
+Run any command above, or let the skill auto-trigger. It activates on phrases like "use the scientific method", "prove it", "validate these claims", "root cause this 100%", "no guessing", or any challenge to an asserted number, limit, or cause.
 
 !!! tip
     When you want a finding double-checked before you act on it, run
@@ -127,19 +118,11 @@ git clone https://github.com/88plug/scientific-method
 
 ## Updating
 
-This plugin ships rolling — every commit is a release. Your installed version
-(`claude plugin list`) and the one in the
-[88plug catalog](https://github.com/88plug/claude-code-plugins) are shown as
-`vYEAR.MONTH.BUILD`; if they differ, run
-`/plugin update scientific-method@88plug`. With marketplace auto-update
-enabled, you always get the latest automatically.
+This plugin ships rolling — every commit is a release. Your installed version (`claude plugin list`) and the one in the [88plug catalog](https://github.com/88plug/claude-code-plugins) are shown as `vYEAR.MONTH.BUILD`; if they differ, run `/plugin update scientific-method@88plug`. With marketplace auto-update enabled, you always get the latest automatically.
 
 ## Contributing
 
-Issues and pull requests are welcome at
-[88plug/scientific-method](https://github.com/88plug/scientific-method). The
-[plugin-validate](https://github.com/88plug/scientific-method/actions/workflows/plugin-validate.yml)
-workflow runs on every change — make sure it passes before you open a PR.
+Issues and pull requests are welcome at [88plug/scientific-method](https://github.com/88plug/scientific-method). The [plugin-validate](https://github.com/88plug/scientific-method/actions/workflows/plugin-validate.yml) workflow runs on every change — make sure it passes before you open a PR.
 
 ## License
 
