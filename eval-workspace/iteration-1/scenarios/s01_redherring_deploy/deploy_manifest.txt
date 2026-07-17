@@ -1,1 +1,0 @@
-release 2026.06.09-r1 rolled to: host1 host2 host3 host4 host5 host6 (03:10-03:16 UTC)

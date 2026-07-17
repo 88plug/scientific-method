@@ -1,3 +1,0 @@
-ttl_seconds: 60   # same TTL for all keys, set at write time
-pattern: cache-aside (miss -> every request computes + fills)
-hot_keys: ~20 keys take 95% of traffic

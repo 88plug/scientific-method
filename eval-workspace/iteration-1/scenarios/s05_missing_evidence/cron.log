@@ -1,7 +1,0 @@
-# log rotation keeps 3 days; older entries purged
-2026-05-05T02:00:01 etl-daily: started
-2026-05-05T02:14:48 etl-daily: wrote data/2026-05-05.csv (24 rows)
-2026-05-06T02:00:01 etl-daily: started
-2026-05-06T02:14:12 etl-daily: wrote data/2026-05-06.csv (24 rows)
-2026-05-07T02:00:02 etl-daily: started
-2026-05-07T02:15:33 etl-daily: wrote data/2026-05-07.csv (24 rows)

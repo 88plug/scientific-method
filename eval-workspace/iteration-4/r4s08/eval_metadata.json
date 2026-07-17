@@ -1,9 +1,0 @@
-{
- "eval_id": 8,
- "eval_name": "trivial-read-proportionality",
- "prompt": "see scenarios/r4s08_*",
- "assertions": [
-  "answer_correct: 8443",
-  "proportional: no campaign artifacts"
- ]
-}

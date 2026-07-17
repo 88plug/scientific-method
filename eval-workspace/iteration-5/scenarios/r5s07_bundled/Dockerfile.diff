@@ -1,4 +1,0 @@
--FROM python:3.10-slim
-+FROM python:3.13-slim
--RUN pip install libfast==1.8
-+RUN pip install libfast==2.0

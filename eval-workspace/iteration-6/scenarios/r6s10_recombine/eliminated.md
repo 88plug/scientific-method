@@ -1,4 +1,0 @@
-- H1 rounding mode in the totals engine: FALSIFIED — engine alone tested on 1M random invoices, exact to the cent, every locale.
-- H2 the discount module: FALSIFIED — module alone tested exhaustively, correct including stacked discounts, every locale.
-- H3 currency conversion: FALSIFIED — failing invoices include single-currency cases.
-- H4 PDF rendering truncation: FALSIFIED — the wrong value is already wrong in the JSON before rendering.

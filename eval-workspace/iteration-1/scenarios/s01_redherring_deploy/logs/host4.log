@@ -1,4 +1,0 @@
-2026-06-09T03:14:00 host4 deployd: applied release 2026.06.09-r1 (svc-api 4.18.2)
-2026-06-09T02:54:11 host4 kernel: sda1: no space left on device
-2026-06-09T03:24:44 host4 svc-api[3112]: FATAL could not write wal segment: ENOSPC
-2026-06-09T03:24:45 host4 systemd: svc-api.service entered failed state

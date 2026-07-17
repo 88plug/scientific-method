@@ -1,3 +1,0 @@
-HOST="0.0.0.0"
-PORT=8443
-DEBUG=False

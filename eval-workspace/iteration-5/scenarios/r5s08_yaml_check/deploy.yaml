@@ -1,5 +1,0 @@
-replicas: 3
-image: app:4.2.1
-resources:
-  limits:
-    memory: 512Mi
