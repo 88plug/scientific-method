@@ -1,8 +1,8 @@
 {
   "name": "scientific-method",
   "source": {
-    "source": "github",
-    "repo": "88plug/scientific-method"
+    "source": "url",
+    "url": "https://github.com/88plug/scientific-method.git"
   },
   "description": "Drive debugging, performance campaigns, claim validation, and invention with the scientific method: falsifiable hypotheses, prediction-before-measurement, controlled experiments, REFUTE-first verification, and persistent falsification ledgers",
   "category": "productivity",
