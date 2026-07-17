@@ -9,8 +9,8 @@ A Claude Code plugin that runs investigations, debugging, performance work, and 
 ## Install
 
 ```text
-/plugin marketplace add 88plug/scientific-method
-/plugin install scientific-method@scientific-method
+/plugin marketplace add 88plug/claude-code-plugins
+/plugin install scientific-method@88plug
 ```
 
 No setup, no API keys, no MCP server. The plugin enforces method over your existing tools.
@@ -113,7 +113,7 @@ Run any command above, or let the skill auto-trigger. It activates on phrases li
 ```text
 git clone https://github.com/88plug/scientific-method
 /plugin marketplace add ./scientific-method
-/plugin install scientific-method@scientific-method
+/plugin install scientific-method@88plug
 ```
 
 ## Updating

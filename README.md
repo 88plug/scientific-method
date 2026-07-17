@@ -16,8 +16,8 @@ A Claude Code plugin that runs investigations, debugging, performance work, and 
 ## Install
 
 ```text
-/plugin marketplace add 88plug/scientific-method
-/plugin install scientific-method@scientific-method
+/plugin marketplace add 88plug/claude-code-plugins
+/plugin install scientific-method@88plug
 ```
 
 ## Quickstart
@@ -129,7 +129,7 @@ or cause.
 ```text
 git clone https://github.com/88plug/scientific-method
 /plugin marketplace add ./scientific-method
-/plugin install scientific-method@scientific-method
+/plugin install scientific-method@88plug
 ```
 
 ## Updating
