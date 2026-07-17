@@ -20,7 +20,7 @@ an update when it is bumped.
   source-available and converts to Apache 2.0 two years after each release.
 - Aligned naming + metadata to 88plug conventions for publication: repo
   `88plug/scientific-method` (no `-plugin` suffix), `author`/`owner` `88plug`
-  (`claude@cryptoandcoffee.com`), marketplace `$schema`/`category: productivity`/
+  (`andrew@88plug.com`), marketplace `$schema`/`category: productivity`/
   `tags: ["type:plugin", …]`, and `repository` `.git` suffix. Added
   `marketplace-entry.json` (github-source entry for the central marketplace).
 
