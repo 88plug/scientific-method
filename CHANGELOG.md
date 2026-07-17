@@ -15,7 +15,7 @@ an update when it is bumped.
 ## 2026.6.12
 
 ### Changed
-- **License: MIT → FSL-1.1-ALv2** (`LICENSE.md`, `Copyright 2026 88plug`) to match
+- **License: MIT → FSL-1.1-ALv2** (`LICENSE`, `Copyright 2026 88plug`) to match
   the house standard for original 88plug plugins. The Functional Source License is
   source-available and converts to Apache 2.0 two years after each release.
 - Aligned naming + metadata to 88plug conventions for publication: repo
