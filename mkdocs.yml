@@ -1,7 +1,5 @@
 site_name: Scientific Method
-site_description: >-
-  A Claude Code plugin that runs investigations, debugging, performance work,
-  and claim validation as falsification-first campaigns.
+site_description: 'Falsification-first investigation and invention workflow for Claude Code — hypothesis ledgers, controlled experiments, REFUTE-first verification, and provable invention for coding agents that need to be right.'
 site_url: https://88plug.github.io/scientific-method/
 repo_url: https://github.com/88plug/scientific-method
 repo_name: 88plug/scientific-method
