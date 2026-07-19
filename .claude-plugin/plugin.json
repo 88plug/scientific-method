@@ -31,6 +31,5 @@
     "experiment",
     "root-cause",
     "benchmarking"
-  ],
-  "hooks": "./hooks/hooks.json"
+  ]
 }
