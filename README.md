@@ -19,6 +19,14 @@
 /plugin install scientific-method@88plug
 ```
 
+### Grok Build
+
+```text
+grok plugin marketplace add 88plug/claude-code-plugins
+grok plugin install scientific-method@88plug --trust
+```
+
+
 No setup, no API keys, no MCP server. The plugin enforces method over your existing tools.
 
 ## Quickstart
