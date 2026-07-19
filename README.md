@@ -2,7 +2,7 @@
 
 # Scientific Method
 
-**Falsification-first investigation and invention workflow for Claude Code** — hypothesis ledgers, controlled experiments, REFUTE-first verification, and provable invention for coding agents that need to be right.
+**Falsification-first investigation and invention for Claude Code + Grok** — hypothesis ledgers, controlled experiments, REFUTE-first verification for coding agents that need to be right.
 
 [![plugin-validate](https://github.com/88plug/scientific-method/actions/workflows/plugin-validate.yml/badge.svg)](https://github.com/88plug/scientific-method/actions/workflows/plugin-validate.yml)
 [![License: FSL-1.1-ALv2](https://img.shields.io/badge/license-FSL--1.1--ALv2-blue?style=flat)](LICENSE)
@@ -13,6 +13,8 @@
 </div>
 
 ## Install
+
+### Claude Code
 
 ```text
 /plugin marketplace add 88plug/claude-code-plugins

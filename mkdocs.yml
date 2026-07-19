@@ -1,5 +1,5 @@
 site_name: Scientific Method
-site_description: 'Falsification-first investigation and invention workflow for Claude Code — hypothesis ledgers, controlled experiments, REFUTE-first verification, and provable invention for coding agents that need to be right.'
+site_description: 'Falsification-first investigation and invention for Claude Code + Grok — hypothesis ledgers, controlled experiments, REFUTE-first verification for coding agents that need to be right.'
 site_url: https://88plug.github.io/scientific-method/
 repo_url: https://github.com/88plug/scientific-method
 repo_name: 88plug/scientific-method
